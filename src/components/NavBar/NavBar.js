@@ -84,12 +84,12 @@ const NavBar = () => {
               </a>
               <ul className="sub-menu bg-bricks">
                 <li>
-                  <a href="./assets/pages/login.html" className="menu__link">
+                  <a href="." className="menu__link">
                     Ingresar
                   </a>
                 </li>
                 <li>
-                  <a href="./assets/pages/register.html" className="menu__link">
+                  <a href="." className="menu__link">
                     Registrarse
                   </a>
                 </li>
@@ -97,7 +97,7 @@ const NavBar = () => {
             </li>
             <li className="cart-link">
               <a
-                href="./assets/pages/cart.html"
+                href="."
                 className="menu__link me-0"
                 aria-label="Carrito de compras"
               >

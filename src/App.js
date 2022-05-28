@@ -7,11 +7,7 @@ function App() {
       <NavBar />
       <main>
         <section id="welcome" className="welcome">
-          <a
-            type="button"
-            className="btn-principal"
-            href="./assets/pages/products.html"
-          >
+          <a type="button" className="btn-principal" href=".">
             <i className="fas fa-shopping-bag me-2"></i> Comprar ahora
           </a>
         </section>
