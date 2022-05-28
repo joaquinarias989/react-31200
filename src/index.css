@@ -11,3 +11,89 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Urbanist&display=swap");
+
+* {
+  font-family: "Urbanist", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  vertical-align: baseline;
+}
+* ::after,
+* ::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+}
+::-webkit-scrollbar {
+  width: 0.7rem;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #ffda07;
+  border-radius: 1rem;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffda07cf;
+}
+html {
+  font-size: 62.5%;
+  line-height: 1.15;
+  scroll-padding-top: 7rem;
+  scroll-behavior: smooth;
+}
+body {
+  background-color: rgba(255, 255, 255, 0.961);
+  background-position: center;
+  background-size: cover;
+  min-height: 100vh;
+  font-size: clamp(1.7rem, 1.75rem, 2vw);
+}
+main {
+  min-height: calc(100vh - 75.13px);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  line-height: 1.15;
+}
+ul,
+ol {
+  list-style-type: none;
+  padding: 0;
+}
+p {
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: #000;
+  display: inline-block;
+  transition: all 0.2s ease-in-out;
+}
+a:hover {
+  color: #157097;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  width: 90%;
+  max-width: 145rem;
+  margin: 0 auto;
+  overflow: hidden;
+}

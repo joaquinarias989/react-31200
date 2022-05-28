@@ -1,91 +1,30 @@
-@import url("https://fonts.googleapis.com/css2?family=Urbanist&display=swap");
-
-* {
-  font-family: "Urbanist", sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  border: none;
-  outline: none;
-  vertical-align: baseline;
-}
-* ::after,
-* ::before {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  border: none;
-  outline: none;
-}
-::-webkit-scrollbar {
-  width: 0.7rem;
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
+.btn-principal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
   background: #ffda07;
-  border-radius: 1rem;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #ffda07cf;
-}
-html {
-  font-size: 62.5%;
-  line-height: 1.15;
-  scroll-padding-top: 7rem;
-  scroll-behavior: smooth;
-}
-body {
-  background-color: rgba(255, 255, 255, 0.961);
-  background-position: center;
-  background-size: cover;
-  min-height: 100vh;
-  font-size: clamp(1.7rem, 1.75rem, 2vw);
-}
-main {
-  min-height: calc(100vh - 75.13px);
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-  padding: 0;
-  font-weight: bold;
-  line-height: 1.15;
-}
-ul,
-ol {
-  list-style-type: none;
-  padding: 0;
-}
-p {
-  margin: 0;
-}
-a {
-  text-decoration: none;
   color: #000;
-  display: inline-block;
-  transition: all 0.2s ease-in-out;
+  border-radius: 2px;
+  padding: 0.8rem 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.4s ease;
 }
-a:hover {
-  color: #157097;
+.btn-principal:hover {
+  background: rgba(5, 5, 5, 0.918);
+  color: #ffda07;
 }
-
-.container {
-  width: 90%;
-  max-width: 145rem;
-  margin: 0 auto;
-  overflow: hidden;
+.welcome {
+  height: calc(100vh - 75.13px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url(./img/welcome-garage-2.webp) center center fixed no-repeat;
+  background-size: cover;
+  border-bottom: 5px solid #ffda07;
+  box-shadow: 0 0 40px #ffda077e;
 }
-img {
-  max-width: 100%;
-  height: auto;
-}
-a {
-  text-decoration: none;
-}
-ul {
-  list-style-type: none;
+.welcome .btn-principal {
+  animation: float 0.6s ease-in-out infinite alternate;
 }
