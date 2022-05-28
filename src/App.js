@@ -6,13 +6,13 @@ function App() {
     <>
       <NavBar />
       <main>
-        <section id="welcome" class="welcome">
+        <section id="welcome" className="welcome">
           <a
             type="button"
-            class="btn-principal"
+            className="btn-principal"
             href="./assets/pages/products.html"
           >
-            <i class="fas fa-shopping-bag me-2"></i> Comprar ahora
+            <i className="fas fa-shopping-bag me-2"></i> Comprar ahora
           </a>
         </section>
       </main>
