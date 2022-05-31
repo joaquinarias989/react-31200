@@ -1,5 +1,5 @@
-import "./NavBar.css";
 import logo from "../../img/logo.svg";
+import Cart from "../CartWidget/CartWidget.js";
 
 const NavBar = () => {
   return (
@@ -95,16 +95,7 @@ const NavBar = () => {
                 </li>
               </ul>
             </li>
-            <li className="cart-link">
-              <a
-                href="."
-                className="menu__link me-0"
-                aria-label="Carrito de compras"
-              >
-                <i className="fas fa-shopping-bag text-white"></i>
-              </a>
-              <span className="cart-quantity"></span>
-            </li>
+            <Cart />
           </ul>
         </div>
       </nav>

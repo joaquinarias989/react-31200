@@ -1,16 +1,13 @@
 import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
+import ListProducts from "./components/ItemListContainer/ItemListContainer";
 
 function App() {
   return (
     <>
       <NavBar />
-      <main>
-        <section id="welcome" className="welcome">
-          <a type="button" className="btn-principal" href=".">
-            <i className="fas fa-shopping-bag me-2"></i> Comprar ahora
-          </a>
-        </section>
+      <main className="d-flex justify-content-center align-items-center">
+        <ListProducts greeting="Bienvenido a la sección de productos"></ListProducts>
       </main>
     </>
   );
