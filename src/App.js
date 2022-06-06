@@ -1,13 +1,13 @@
 import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
-import ListProducts from "./components/ItemListContainer/ItemListContainer";
+import ItemListContainer from "./components/ItemListContainer/ItemListContainer";
 
 function App() {
   return (
     <>
       <NavBar />
-      <main className="d-flex justify-content-center align-items-center">
-        <ListProducts greeting="Bienvenido a la sección de productos"></ListProducts>
+      <main className="container g-0">
+        <ItemListContainer greeting="Productos"></ItemListContainer>
       </main>
     </>
   );

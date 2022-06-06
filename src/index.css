@@ -437,17 +437,17 @@ select:-webkit-autofill:focus {
     right: -5px;
   }
 }
-.product__card:hover .product__card__img img {
+/* .product__card:hover .product__card__img img {
   width: 125%;
   height: 140%;
-}
+} */
 .product__card:hover .product__card__title::after {
   width: 90%;
 }
-.product__card:hover .product__card__info,
+/* .product__card:hover .product__card__info,
 .product__card:hover .btn-cart {
   color: #fff;
-}
+} */
 .product__card:hover .offer {
   animation: float 0.4s ease-in-out infinite alternate;
 }
