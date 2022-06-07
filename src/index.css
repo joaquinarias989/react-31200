@@ -276,6 +276,10 @@ select:-webkit-autofill:focus {
   background: rgba(5, 5, 5, 0.918);
   color: #ffda07;
 }
+.btn-principal:disabled {
+  color: #0005;
+  background-color: #ffda0750;
+}
 
 .btn-secundario {
   display: flex;

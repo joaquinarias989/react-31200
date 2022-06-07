@@ -46,11 +46,11 @@ function ItemCount({ stock, initial }) {
           <i className="fas fa-trash"></i>
         </button>
         <button
-          className="btn-cart w-100"
+          className="btn-cart w-100 mt-3"
           onClick={quantity.increase}
           disabled={quantity.counter >= stock}
         >
-          Agregar al Carrito <i className="fas fa-shopping-bag"></i>
+          Agregar al Carrito <i className="fas fa-cart-plus"></i>
         </button>
       </div>
     </>
