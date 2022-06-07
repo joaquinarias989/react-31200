@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const useCounter = (stock = 1, initial = 0) => {
   const [counter, setCounter] = useState(initial);
@@ -11,7 +11,7 @@ const useCounter = (stock = 1, initial = 0) => {
 
   return { counter, increase, decrease, reset };
 };
-function ItemCount({ stock, initial }) {
+function ItemCount({ stock, initial, onAdd }) {
   const quantity = useCounter(stock, initial);
 
   return (
@@ -24,7 +24,9 @@ function ItemCount({ stock, initial }) {
         >
           <i className="fas fa-plus"></i>
         </button>
-        <span className="px-5 py-1">{quantity.counter}</span>
+        <span className="px-5 py-1" id="quantity">
+          {quantity.counter}
+        </span>
         <button
           className="btn-info bg-info bg-secondary py-1 w-25"
           onClick={quantity.decrease}
@@ -47,8 +49,8 @@ function ItemCount({ stock, initial }) {
         </button>
         <button
           className="btn-cart w-100 mt-3"
-          onClick={quantity.increase}
-          disabled={quantity.counter >= stock}
+          onClick={onAdd}
+          disabled={quantity.counter >= stock || quantity.counter === 0}
         >
           Agregar al Carrito <i className="fas fa-cart-plus"></i>
         </button>
