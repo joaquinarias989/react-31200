@@ -1,0 +1,69 @@
+const products = [
+  {
+    id: "RMPN",
+    nombre: "Remera Phenomenally",
+    precio: 2380,
+    descripcion: "Lorem ipsum dolor",
+    color: "Negro",
+    talle: "M",
+    stock: 2,
+    img: "",
+    cantidad: 0,
+    categoria: "Remeras",
+  },
+  {
+    id: "RRDA",
+    nombre: "Remera Risks and Dreams",
+    precio: 2499,
+    descripcion: "Lorem ipsum dolor",
+    color: "Amarillo",
+    talle: "XL",
+    stock: 3,
+    img: "",
+    cantidad: 0,
+    categoria: "Remeras",
+  },
+  {
+    id: "BCN",
+    nombre: "Buzo Chineze",
+    precio: 4630,
+    descripcion: "Lorem ipsum dolor",
+    color: "Negro",
+    talle: "L",
+    stock: 2,
+    img: "",
+    cantidad: 0,
+    categoria: "Buzos",
+  },
+  {
+    id: "JBN",
+    nombre: "Jacket Bomber",
+    precio: 5500,
+    descripcion: "Lorem ipsum dolor",
+    color: "Negro",
+    talle: "S",
+    stock: 2,
+    img: "",
+    cantidad: 0,
+    categoria: "Camperas",
+  },
+];
+
+export const fetchData = async () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(products);
+    }, 2000);
+  });
+};
+
+// const fetchData = async () => {
+//   try {
+//     const res = await fetch("data/data.json"); //"https://api.mercadolibre.com/sites/MLA/search?q=remera"
+//     const data = await res.json();
+
+//     setProducts(data); //data.results;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
