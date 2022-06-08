@@ -39,9 +39,7 @@ function ItemCount({ stock, initial, onAdd }) {
       <div className="d-flex jc-between">
         <button
           className={
-            quantity.counter === 0
-              ? "d-none"
-              : "btn-secundario bg-danger text-white w-25"
+            quantity.counter === 0 ? "d-none" : "btn-remove text-white w-25"
           }
           onClick={quantity.reset}
         >
@@ -50,7 +48,7 @@ function ItemCount({ stock, initial, onAdd }) {
         <button
           className="btn-cart w-100 mt-3"
           onClick={onAdd}
-          disabled={quantity.counter >= stock || quantity.counter === 0}
+          disabled={quantity.counter === 0}
         >
           Agregar al Carrito <i className="fas fa-cart-plus"></i>
         </button>
