@@ -30,7 +30,7 @@ function ItemCount({ stock, initial, onAdd }) {
         <button
           className="btn-info bg-info bg-secondary py-1 w-25"
           onClick={quantity.decrease}
-          disabled={quantity.counter <= initial}
+          disabled={quantity.counter <= 0}
         >
           <i className="fas fa-minus"></i>
         </button>

@@ -19,6 +19,8 @@
   border: none;
   outline: none;
 }
+*:disabled{
+ color: inherit;}
 
 /*   GLOBALS  */
 html {

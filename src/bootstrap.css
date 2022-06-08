@@ -6506,7 +6506,7 @@ progress {
   .btn:disabled, .btn.disabled,
   fieldset:disabled .btn {
     pointer-events: none;
-    opacity: 0.65; }
+    }
 
 .btn-primary {
   color: #000;

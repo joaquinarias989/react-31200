@@ -1,7 +1,7 @@
 const products = [
   {
     id: "RMPN",
-    nombre: "Remera Phenomenally",
+    titulo: "Remera Phenomenally",
     precio: 2380,
     descripcion: "Lorem ipsum dolor",
     color: "Negro",
@@ -13,7 +13,7 @@ const products = [
   },
   {
     id: "RRDA",
-    nombre: "Remera Risks and Dreams",
+    titulo: "Remera Risks and Dreams",
     precio: 2499,
     descripcion: "Lorem ipsum dolor",
     color: "Amarillo",
@@ -25,7 +25,7 @@ const products = [
   },
   {
     id: "BCN",
-    nombre: "Buzo Chineze",
+    titulo: "Buzo Chineze",
     precio: 4630,
     descripcion: "Lorem ipsum dolor",
     color: "Negro",
@@ -37,7 +37,7 @@ const products = [
   },
   {
     id: "JBN",
-    nombre: "Jacket Bomber",
+    titulo: "Jacket Bomber",
     precio: 5500,
     descripcion: "Lorem ipsum dolor",
     color: "Negro",
