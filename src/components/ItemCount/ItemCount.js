@@ -50,7 +50,7 @@ function ItemCount({ stock, initial, onAdd }) {
         <button
           className="btn-cart w-100 mt-3"
           onClick={onAdd}
-          disabled={quantity.counter >= stock || quantity.counter === 0}
+          disabled={quantity.counter === 0}
         >
           Agregar al Carrito <i className="fas fa-cart-plus"></i>
         </button>
