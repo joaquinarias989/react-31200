@@ -7,7 +7,7 @@ const products = [
     color: "Negro",
     talle: "M",
     stock: 5,
-    img: "",
+    img: "https://i.ibb.co/Jq4bPGY/shirt-yellow.webp",
     cantidad: 0,
     categoria: "Remeras",
   },
@@ -19,19 +19,19 @@ const products = [
     color: "Amarillo",
     talle: "XL",
     stock: 3,
-    img: "",
+    img: "https://i.ibb.co/SBYCf9h/tshirt-2.webp",
     cantidad: 0,
     categoria: "Remeras",
   },
   {
-    id: "BCN",
-    titulo: "Buzo Chineze",
+    id: "BR",
+    titulo: "Buzo Rose",
     precio: 4630,
     descripcion: "Lorem ipsum dolor",
     color: "Negro",
     talle: "L",
     stock: 3,
-    img: "",
+    img: "https://i.ibb.co/MMnBqr6/buzo-2.webp",
     cantidad: 0,
     categoria: "Buzos",
   },
@@ -43,7 +43,7 @@ const products = [
     color: "Negro",
     talle: "S",
     stock: 5,
-    img: "",
+    img: "https://i.ibb.co/1G0F6rw/campera.webp",
     cantidad: 0,
     categoria: "Camperas",
   },
@@ -56,14 +56,3 @@ export const fetchData = async (id) => {
     }, 2000);
   });
 };
-
-// const fetchData = async () => {
-//   try {
-//     const res = await fetch("data/data.json"); //"https://api.mercadolibre.com/sites/MLA/search?q=remera"
-//     const data = await res.json();
-
-//     setProducts(data); //data.results;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
