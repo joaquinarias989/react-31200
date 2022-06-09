@@ -6,7 +6,7 @@ const products = [
     descripcion: "Lorem ipsum dolor",
     color: "Negro",
     talle: "M",
-    stock: 2,
+    stock: 5,
     img: "",
     cantidad: 0,
     categoria: "Remeras",
@@ -30,7 +30,7 @@ const products = [
     descripcion: "Lorem ipsum dolor",
     color: "Negro",
     talle: "L",
-    stock: 2,
+    stock: 3,
     img: "",
     cantidad: 0,
     categoria: "Buzos",
@@ -42,17 +42,17 @@ const products = [
     descripcion: "Lorem ipsum dolor",
     color: "Negro",
     talle: "S",
-    stock: 2,
+    stock: 5,
     img: "",
     cantidad: 0,
     categoria: "Camperas",
   },
 ];
 
-export const fetchData = async () => {
+export const fetchData = async (id) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve(products);
+      id ? resolve(products.find((p) => p.id === id)) : resolve(products);
     }, 2000);
   });
 };

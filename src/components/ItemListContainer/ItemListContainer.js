@@ -8,7 +8,10 @@ const ItemListContainer = ({ greeting }) => {
 
   useEffect(() => {
     fetchData()
-      .then((resp) => setProducts(resp))
+      .then((resp) => {
+        console.log(resp);
+        setProducts(resp);
+      })
       .catch((err) => alert(err))
       .finally(() => setLoading(false));
   }, []);
