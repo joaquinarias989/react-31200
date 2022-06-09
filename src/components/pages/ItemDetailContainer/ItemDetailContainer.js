@@ -14,7 +14,7 @@ const ItemDetailContainer = ({ id }) => {
   });
 
   return (
-    <>
+    <section id="product-section" className="product">
       {loading ? (
         <div className="dots-box">
           <div className="dots"></div>
@@ -22,7 +22,7 @@ const ItemDetailContainer = ({ id }) => {
       ) : (
         <ItemDetail key={prod.id} item={prod} />
       )}
-    </>
+    </section>
   );
 };
 

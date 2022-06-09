@@ -1,12 +1,7 @@
 import sizes from "../../../../img/medidas.svg";
 const ItemDetail = ({ item }) => {
   return (
-    <section
-      id="product-section"
-      className="product container"
-      data-aos="fade-right"
-      data-aos-duration="1000"
-    >
+    <>
       <div className="section__header">
         <h1 className="title-underlined">{item.title}</h1>
 
@@ -115,21 +110,21 @@ const ItemDetail = ({ item }) => {
             libero repellendus. Necessitatibus, quasi cumque.
           </p>
           <div className="product__preferences d-flex justify-content-between align-items-center mt-3 flex-wrap flex-md-nowrap">
-            <select name="color" className="w-100">
+            <select name="color" className="w-100" defaultValue={"Color"}>
               <option value={"Color"} disabled>
                 Color
               </option>
-              <option value={"Blanco"}>Blanco</option>
-              <option value={"Negro"}>Negro</option>
-              <option value={"Amarillo"}>Amarillo</option>
+              <option value={item.color}>{item.color}</option>;
             </select>
-            <select name="talle" className="w-100 ms-md-3 mt-3 mt-md-0">
+            <select
+              name="talle"
+              className="w-100 ms-md-3 mt-3 mt-md-0"
+              defaultValue={"Talle"}
+            >
               <option value={"Talle"} disabled>
                 Talle
               </option>
-              <option value={"S"}>S</option>
-              <option value={"M"}>M</option>
-              <option value={"L"}>L</option>
+              <option value={item.size}>{item.size}</option>
             </select>
           </div>
           <div className="product__sizes my-4">
@@ -143,7 +138,11 @@ const ItemDetail = ({ item }) => {
             <button className="btn-quantity" aria-label="Disminuir un producto">
               -
             </button>
-            <input type="number" aria-label="Cantidad del producto a comprar" />
+            <input
+              type="number"
+              defaultValue={0}
+              aria-label="Cantidad del producto a comprar"
+            />
             <button className="btn-quantity" aria-label="Añadir un producto">
               +
             </button>
@@ -156,7 +155,7 @@ const ItemDetail = ({ item }) => {
           </button>
         </div>
       </div>
-    </section>
+    </>
   );
 };
 
