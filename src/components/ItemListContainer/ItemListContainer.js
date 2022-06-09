@@ -1,18 +1,14 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import shirt from "../../img/shirt-yellow.webp";
 import hoodie from "../../img/buzo-2.webp";
 
 import ItemCount from "../ItemCount/ItemCount";
 
-const addToCart = (e) => {
-  const btn = e.target;
-  const prod = btn.closest(".product__card__info");
-  const quantity = prod.querySelector("#quantity").textContent;
-  const prodTitle = prod.querySelector(".product__card__title").textContent;
-
-  alert(`${prodTitle} (${quantity}) agregado exitosamente!`);
-};
-
 const ItemListContainer = ({ greeting }) => {
+  const onAdd = (counter) => {
+    alert(`(${counter}) producto/s agregado/s exitosamente!`);
+  };
+
   return (
     <section className="py-5" id="products">
       <h1 className="title-primary mb-5">{greeting}</h1>
@@ -27,7 +23,7 @@ const ItemListContainer = ({ greeting }) => {
               <h4 className="product__card__title">Remera Phenomenally</h4>
               <h4 className="product__card__price">$ 2380</h4>
               <div className="product__card__btn flex-column gap-3">
-                <ItemCount stock={5} initial={0} onAdd={addToCart} />
+                <ItemCount stock={5} initial={0} onAdd={onAdd} />
               </div>
             </div>
           </a>
@@ -41,7 +37,7 @@ const ItemListContainer = ({ greeting }) => {
               <h4 className="product__card__title">Buzo Rose</h4>
               <h4 className="product__card__price">$ 5700</h4>
               <div className="product__card__btn flex-column gap-3">
-                <ItemCount stock={3} initial={0} onAdd={addToCart} />
+                <ItemCount stock={3} initial={0} onAdd={onAdd} />
               </div>
             </div>
           </a>
