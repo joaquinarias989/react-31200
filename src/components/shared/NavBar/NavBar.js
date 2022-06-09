@@ -1,11 +1,12 @@
-import logo from "../../img/logo.svg";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import logo from "../../../img/logo.svg";
 import Cart from "../CartWidget/CartWidget.js";
 
 const NavBar = () => {
   return (
     <header className="bg-bricks">
       <nav className="navbar container d-flex navbar-expand-lg navbar-light">
-        <a href="index.html">
+        <a href="#">
           <picture className="logo d-flex">
             <img
               src={logo}
