@@ -1,12 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import logo from "../../../img/logo.svg";
-import Cart from "../CartWidget/CartWidget.js";
+import { Outlet, NavLink } from "react-router-dom";
+import logo from "../../img/logo.svg";
+import CartWidget from "../CartWidget.js";
 
 const NavBar = () => {
   return (
     <header className="bg-bricks">
       <nav className="navbar container d-flex navbar-expand-lg navbar-light">
-        <a href="#">
+        <NavLink to="/">
           <picture className="logo d-flex">
             <img
               src={logo}
@@ -14,7 +15,7 @@ const NavBar = () => {
               width="130"
             />
           </picture>
-        </a>
+        </NavLink>
 
         <button
           className="navbar-toggler"
@@ -31,46 +32,63 @@ const NavBar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-lg-auto">
             <li className="dropdown-link">
-              <a
-                className="menu__link"
-                href="."
+              <NavLink
+                to="/Productos"
+                className={({ isActive }) =>
+                  isActive ? "menu__link menu__link--active" : "menu__link"
+                }
                 role="button"
                 aria-label="Cuenta de Usuario"
               >
                 Productos
-              </a>
+              </NavLink>
               <ul className="sub-menu bg-bricks">
                 <li>
-                  <a href="." className="menu__link">
+                  <NavLink
+                    to="/Productos/Categorias/Remeras"
+                    className={({ isActive }) =>
+                      isActive ? "menu__link menu__link--active" : "menu__link"
+                    }
+                  >
                     Remeras
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a href="." className="menu__link">
+                  <NavLink
+                    to="/Productos/Categorias/Pantalones"
+                    className={({ isActive }) =>
+                      isActive ? "menu__link menu__link--active" : "menu__link"
+                    }
+                  >
                     Pantalones
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a href="." className="menu__link">
+                  <NavLink
+                    to="/Productos/Categorias/Abrigos"
+                    className={({ isActive }) =>
+                      isActive ? "menu__link menu__link--active" : "menu__link"
+                    }
+                  >
                     Abrigos
-                  </a>
+                  </NavLink>
                 </li>
               </ul>
             </li>
             <li>
-              <a href="#help" className="menu__link">
+              <NavLink to="/" className="menu__link">
                 Ayuda
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="#about" className="menu__link">
+              <NavLink to="/" className="menu__link">
                 Nosotros
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="#contact" className="menu__link">
+              <NavLink to="/" className="menu__link">
                 Contacto
-              </a>
+              </NavLink>
             </li>
           </ul>
           <ul className="navbar-nav mb-2 mb-lg-0">
@@ -85,21 +103,32 @@ const NavBar = () => {
               </a>
               <ul className="sub-menu bg-bricks">
                 <li>
-                  <a href="." className="menu__link">
+                  <NavLink
+                    to="/Login"
+                    className={({ isActive }) =>
+                      isActive ? "menu__link menu__link--active" : "menu__link"
+                    }
+                  >
                     Ingresar
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a href="." className="menu__link">
+                  <NavLink
+                    to="/Register"
+                    className={({ isActive }) =>
+                      isActive ? "menu__link menu__link--active" : "menu__link"
+                    }
+                  >
                     Registrarse
-                  </a>
+                  </NavLink>
                 </li>
               </ul>
             </li>
-            <Cart />
+            <CartWidget />
           </ul>
         </div>
       </nav>
+      <Outlet />
     </header>
   );
 };

@@ -1,50 +1,50 @@
 [
-   { 
-    "id": "RMPN",
-    "titulo":"Remera Phenomenally",
-    "precio": 2380,
-    "descripcion": "Lorem ipsum dolor",
+  {
+   "id": "RMPN",
+    "title": "Remera Phenomenally",
+    "price": 2380,
+    "description": "Lorem ipsum dolor",
     "color": "Negro",
-    "talle": "M",
-    "stock": 2,
-    "img": "",
-    "cantidad": 0,
-    "categoria": "Remeras"
-    },
+    "size": "M",
+    "stock": 5,
+    "img": "https://i.ibb.co/Jq4bPGY/shirt-yellow.webp",
+    "quantity": 0,
+    "category": "Remeras"
+  },
   {
     "id": "RRDA",
-    "titulo": "Remera Risks and Dreams",
-    "precio": 2499,
-    "descripcion": "Lorem ipsum dolor",
+    "title": "Remera Risks and Dreams",
+    "price": 2499,
+    "description": "Lorem ipsum dolor",
     "color": "Amarillo",
-    "talle": "XL",
+    "size": "XL",
     "stock": 3,
-    "img": "",
-    "cantidad": 0,
-    "categoria": "Remeras"
-},
+    "img": "https://i.ibb.co/SBYCf9h/tshirt-2.webp",
+    "quantity": 0,
+    "category": "Remeras"
+  },
   {
-    "id": "BCN",
-   "titulo":  "Buzo Chineze",
-    "precio": 4630,
-    "descripcion": "Lorem ipsum dolor",
+    "id": "BR",
+    "title": "Buzo Rose",
+    "price": 4630,
+    "description": "Lorem ipsum dolor",
     "color": "Negro",
-    "talle": "L",
-    "stock": 2,
-    "img": "",
-    "cantidad": 0,
-    "categoria": "Buzos"
-},
+    "size": "L",
+    "stock": 3,
+    "img": "https://i.ibb.co/MMnBqr6/buzo-2.webp",
+    "quantity": 0,
+    "category": "Abrigos"
+  },
   {
     "id": "JBN",
-    "titulo": "Jacket Bomber",
-    "precio": 5500,
-    "descripcion": "Lorem ipsum dolor",
+    "title": "Jacket Bomber",
+    "price": 5500,
+    "description": "Lorem ipsum dolor",
     "color": "Negro",
-   "talle":  "S",
-   "stock":  2,
-   "img":  "",
-   "cantidad":  0,
-   "categoria":  "Camperas"
-}
+    "size": "S",
+    "stock": 5,
+    "img": "https://i.ibb.co/1G0F6rw/campera.webp",
+    "quantity": 0,
+    "category": "Abrigos"
+  }
 ]

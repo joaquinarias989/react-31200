@@ -33,7 +33,7 @@ const products = [
     stock: 3,
     img: "https://i.ibb.co/MMnBqr6/buzo-2.webp",
     quantity: 0,
-    category: "Buzos",
+    category: "Abrigos",
   },
   {
     id: "JBN",
@@ -45,14 +45,18 @@ const products = [
     stock: 5,
     img: "https://i.ibb.co/1G0F6rw/campera.webp",
     quantity: 0,
-    category: "Camperas",
+    category: "Abrigos",
   },
 ];
 
-export const fetchData = async (id) => {
+export const fetchData = async (id, category) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      id ? resolve(products.find((p) => p.id === id)) : resolve(products);
+      id
+        ? resolve(products.find((p) => p.id === id))
+        : category
+        ? resolve(products.filter((p) => p.category === category))
+        : resolve(products);
     }, 2000);
   });
 };

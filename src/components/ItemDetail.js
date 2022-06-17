@@ -1,21 +1,7 @@
-import sizes from "../../../../img/medidas.svg";
+import sizes from ".././img/medidas.svg";
 const ItemDetail = ({ item }) => {
   return (
     <>
-      <div className="section__header">
-        <h1 className="title-underlined">{item.title}</h1>
-
-        <ol className="breadcrumb">
-          <li>
-            <a href="index">Inicio</a>
-          </li>
-          <li>
-            <a href="products">Productos</a>
-          </li>
-          <li>{item.title}</li>
-        </ol>
-      </div>
-
       <div className="product__header row justify-content-between align-items-end">
         <div className="col-12">
           <h2>$ {item.price}</h2>
