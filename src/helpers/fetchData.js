@@ -44,7 +44,7 @@ const products = [
     size: "S",
     stock: 5,
     img: "https://i.ibb.co/1G0F6rw/campera.webp",
-    quantity: 0,
+    quantity: 3,
     category: "Abrigos",
   },
 ];

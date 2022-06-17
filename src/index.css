@@ -1339,7 +1339,7 @@ main.bg-bricks {
     width: 100%;
   }
 }
-.product__main .product__details .product__quantity input {
+.product__main .product__details .product__quantity span {
   flex-basis: 33%;
   background: #f4f4f4;
   padding: 0.3rem;
