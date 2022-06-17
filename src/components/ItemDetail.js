@@ -143,7 +143,7 @@ const ItemDetail = ({ item }) => {
                 <i className="fa fa-paintbrush"></i> Modificar
               </button>
               <Link to="/Carrito" className="btn-principal w-50">
-                <i className="fa fa-cart-plus"></i> Iniciar Compra
+                <i className="fa fa-cart-plus"></i> Terminar Compra
               </Link>
             </div>
           ) : quantityCart && continueBuy ? (
