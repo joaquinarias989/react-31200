@@ -7,7 +7,6 @@ function ItemCount({ page, stock, initial, onAdd }) {
     quantity < stock ? setQuantity(quantity + 1) : setQuantity(stock);
   const decrease = () =>
     quantity >= initial ? setQuantity(quantity - 1) : setQuantity(0);
-  // const reset = () => setQuantity(initial);
 
   return page === "detail" ? (
     <>
@@ -72,12 +71,6 @@ function ItemCount({ page, stock, initial, onAdd }) {
         >
           Agregar al Carrito <i className="fas fa-cart-plus"></i>
         </button>
-        {/* <button
-              className={quantity === 0 ? "d-none" : "btn-remove text-white"}
-              onClick={reset}
-            >
-              <i className="fas fa-trash"></i>
-            </button> */}
       </div>
     </>
   );

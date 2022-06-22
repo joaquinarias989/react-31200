@@ -16,6 +16,7 @@ const ItemDetail = ({ item }) => {
   const askContinue = () => {
     setContinueBuy(!continueBuy);
   };
+
   return (
     <>
       <div className="product__header row justify-content-between align-items-end">
