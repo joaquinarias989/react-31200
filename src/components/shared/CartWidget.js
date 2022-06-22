@@ -4,7 +4,7 @@ import { CartContext } from "../../context/cartContext";
 import CartResume from "../CartResume";
 
 const CartWidget = () => {
-  const { cart, totalQuantity } = useContext(CartContext);
+  const { totalQuantity } = useContext(CartContext);
   const { pathname } = useLocation();
 
   return (
