@@ -1,22 +1,21 @@
 import ItemCount from "./ItemCount";
 import sizes from ".././img/medidas.svg";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { CartContext } from "../context/cartContext";
 
 const ItemDetail = ({ item }) => {
-  const [quantityCart, setQuantityCart] = useState(Number);
   const [continueBuy, setContinueBuy] = useState(true);
+  const { addToCart } = useContext(CartContext);
 
   const onAdd = (quantity) => {
     setContinueBuy(!continueBuy);
-    setQuantityCart(quantity);
-    alert(`${item.title} (${quantity}) agregado exitosamente!`);
+    addToCart(item, quantity);
   };
 
   const askContinue = () => {
     setContinueBuy(!continueBuy);
   };
-
   return (
     <>
       <div className="product__header row justify-content-between align-items-end">
@@ -133,26 +132,19 @@ const ItemDetail = ({ item }) => {
               className="img-fluid"
             />
           </div>
-          {quantityCart && !continueBuy ? (
+          {!continueBuy ? (
             <div className="d-flex">
               <button
-                className="btn-secondary w-50"
+                className="btn-secondary w-25"
                 aria-label="Cargar mas productos"
                 onClick={askContinue}
               >
                 <i className="fa fa-paintbrush"></i> Modificar
               </button>
-              <Link to="/Carrito" className="btn-principal w-50">
+              <Link to="/Carrito" className="btn-principal w-75">
                 <i className="fa fa-cart-plus"></i> Terminar Compra
               </Link>
             </div>
-          ) : quantityCart && continueBuy ? (
-            <ItemCount
-              page={"detail"}
-              stock={item.stock}
-              initial={quantityCart}
-              onAdd={onAdd}
-            />
           ) : (
             <ItemCount
               page={"detail"}

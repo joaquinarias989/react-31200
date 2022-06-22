@@ -1,10 +1,12 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link } from "react-router-dom";
 import ItemCount from "./ItemCount";
-
+import { CartContext } from "../context/cartContext";
+import { useContext } from "react";
 function Item({ item }) {
+  const { addToCart } = useContext(CartContext);
+
   const onAdd = (quantity) => {
-    alert(`${item.title} (${quantity}) agregado exitosamente!`);
+    addToCart(item, quantity);
   };
 
   return (

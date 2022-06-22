@@ -1,7 +1,9 @@
 import { NavLink } from "react-router-dom";
+import CartResume from "../CartResume";
 
 const Cart = () => {
   const ship = 475;
+
   return (
     <section id="cart" className="cart container">
       <div className="section__header row">
@@ -186,22 +188,7 @@ const Cart = () => {
           </div>
         </article>
         <article className="cart__resume ps-md-5 ps-xl-0 col-md-6 col-xl-4 flex-column">
-          <div className="cart__resume__products flex-column"></div>
-
-          <div className="cart__subtotal flex-column">
-            <h4 className="flex-row jc-between algn-items-center">
-              Subtotal <span id="subtotal">$ </span>
-            </h4>
-            <h4 className="flex-row jc-between algn-items-center">
-              Costo de Envío <span id="ship-cart">$ {ship}</span>
-            </h4>
-          </div>
-          <div className="cart__total flex-row flex-wrap jc-between algn-items-center">
-            <h2 className="text-overline">TOTAL</h2>
-            <h2 className="text-overline" id="total">
-              $
-            </h2>
-          </div>
+          <CartResume type={"page"} />
         </article>
       </div>
     </section>

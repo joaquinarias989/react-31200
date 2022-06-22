@@ -36,7 +36,7 @@ const products = [
     category: "Abrigos",
   },
   {
-    id: "JBN",
+    id: "JBN-S",
     title: "Jacket Bomber",
     price: 5500,
     description: "Lorem ipsum dolor",
@@ -44,7 +44,7 @@ const products = [
     size: "S",
     stock: 5,
     img: "https://i.ibb.co/1G0F6rw/campera.webp",
-    quantity: 3,
+    quantity: 0,
     category: "Abrigos",
   },
 ];
@@ -57,6 +57,6 @@ export const fetchData = async (id, category) => {
         : category
         ? resolve(products.filter((p) => p.category === category))
         : resolve(products);
-    }, 2000);
+    }, 500);
   });
 };
