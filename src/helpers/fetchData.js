@@ -36,7 +36,7 @@ const products = [
     category: "Abrigos",
   },
   {
-    id: "JBN",
+    id: "JBN-S",
     title: "Jacket Bomber",
     price: 5500,
     description: "Lorem ipsum dolor",
@@ -57,6 +57,6 @@ export const fetchData = async (id, category) => {
         : category
         ? resolve(products.filter((p) => p.category === category))
         : resolve(products);
-    }, 2000);
+    }, 500);
   });
 };

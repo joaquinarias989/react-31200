@@ -1,5 +1,21 @@
+import ItemCount from "./ItemCount";
 import sizes from ".././img/medidas.svg";
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { CartContext } from "../context/cartContext";
+
 const ItemDetail = ({ item }) => {
+  const [continueBuy, setContinueBuy] = useState(true);
+  const { addToCart } = useContext(CartContext);
+
+  const onAdd = (quantity) => {
+    setContinueBuy(!continueBuy);
+    addToCart(item, quantity);
+  };
+
+  const askContinue = () => {
+    setContinueBuy(!continueBuy);
+  };
   return (
     <>
       <div className="product__header row justify-content-between align-items-end">
@@ -90,11 +106,7 @@ const ItemDetail = ({ item }) => {
         </div>
 
         <div className="product__details col-md-6 flex-column">
-          <p className="product__description">
-            {item.description}. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Voluptatem nam iure beatae omnis alias architecto
-            libero repellendus. Necessitatibus, quasi cumque.
-          </p>
+          <p className="product__description">{item.description}.</p>
           <div className="product__preferences d-flex justify-content-between align-items-center mt-3 flex-wrap flex-md-nowrap">
             <select name="color" className="w-100" defaultValue={"Color"}>
               <option value={"Color"} disabled>
@@ -120,25 +132,27 @@ const ItemDetail = ({ item }) => {
               className="img-fluid"
             />
           </div>
-          <div className="product__quantity d-flex jc-between align-items-center mb-4">
-            <button className="btn-quantity" aria-label="Disminuir un producto">
-              -
-            </button>
-            <input
-              type="number"
-              defaultValue={0}
-              aria-label="Cantidad del producto a comprar"
+          {!continueBuy ? (
+            <div className="d-flex">
+              <button
+                className="btn-secondary w-25"
+                aria-label="Cargar mas productos"
+                onClick={askContinue}
+              >
+                <i className="fa fa-paintbrush"></i> Modificar
+              </button>
+              <Link to="/Carrito" className="btn-principal w-75">
+                <i className="fa fa-cart-plus"></i> Terminar Compra
+              </Link>
+            </div>
+          ) : (
+            <ItemCount
+              page={"detail"}
+              stock={item.stock}
+              initial={item.quantity}
+              onAdd={onAdd}
             />
-            <button className="btn-quantity" aria-label="Añadir un producto">
-              +
-            </button>
-          </div>
-          <button
-            className="btn-principal w-100"
-            aria-label="Cargar mas productos"
-          >
-            <i className="fa fa-cart-plus"></i> Agregar al Carrito
-          </button>
+          )}
         </div>
       </div>
     </>

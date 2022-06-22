@@ -6,10 +6,11 @@ import Loading from "../Loading";
 
 const ItemDetailContainer = () => {
   const [prod, setProd] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(Boolean);
   const { id } = useParams();
 
   useEffect(() => {
+    setLoading(true);
     fetchData(id)
       .then((resp) => setProd(resp))
       .catch((err) => alert(err))

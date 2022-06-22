@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Outlet, NavLink } from "react-router-dom";
 import logo from "../../img/logo.svg";
-import CartWidget from "../CartWidget.js";
+import CartWidget from "./CartWidget";
 
 const NavBar = () => {
   return (
