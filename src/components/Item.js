@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import ItemCount from "./ItemCount";
 import { CartContext } from "../context/cartContext";
-import { useContext } from "react";
-function Item({ item }) {
+import { memo, useContext } from "react";
+
+const Item = memo(({ item }) => {
   const { addToCart } = useContext(CartContext);
 
   const onAdd = (quantity) => {
@@ -23,6 +24,6 @@ function Item({ item }) {
       <ItemCount stock={item.stock} initial={item.quantity} onAdd={onAdd} />
     </article>
   );
-}
+});
 
 export default Item;

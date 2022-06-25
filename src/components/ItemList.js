@@ -1,6 +1,7 @@
+import { memo } from "react";
 import Item from "./Item";
 
-function ItemList({ items }) {
+const ItemList = memo(({ items }) => {
   return (
     <div className="products__list d-flex justify-content-evenly justify-content-md-start">
       {items.map((prod) => (
@@ -8,6 +9,6 @@ function ItemList({ items }) {
       ))}
     </div>
   );
-}
+});
 
 export default ItemList;
