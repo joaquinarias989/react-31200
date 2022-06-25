@@ -6,7 +6,7 @@ function ItemCount({ page, stock, initial, onAdd }) {
   const increase = () =>
     quantity < stock ? setQuantity(quantity + 1) : setQuantity(stock);
   const decrease = () =>
-    quantity >= initial ? setQuantity(quantity - 1) : setQuantity(0);
+    quantity > 0 ? setQuantity(quantity - 1) : setQuantity(0);
 
   return page === "detail" ? (
     <>
