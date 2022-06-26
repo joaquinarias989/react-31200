@@ -14,15 +14,14 @@ export const CartContextProvider = ({ children }) => {
   let totalQuantity = cart.reduce((acc, { quantity }) => acc + quantity, 0);
 
   const addToCart = (item, quantity) => {
-    if (cart.includes(item)) {
+    if (cart.some((p) => p.id === item.id)) {
       cart.find((p) => p.id === item.id).quantity = quantity;
       setCart([...cart]);
     } else {
       item.quantity = quantity;
       setCart([...cart, item]);
     }
-
-    toast.success(`${item.title} (${item.quantity}) agregado exitosamente!`);
+    toast.success(`${item.title} (${quantity}) agregado exitosamente!`);
   };
 
   const addOne = (item) => {
@@ -60,6 +59,14 @@ export const CartContextProvider = ({ children }) => {
     setCart([]);
   };
 
+  const updateProdQuantity = (idProd) => {
+    const prod = cart.find((p) => p.id === idProd);
+    if (prod) {
+      return prod.quantity;
+    }
+    return 0;
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -68,6 +75,7 @@ export const CartContextProvider = ({ children }) => {
         reduceOne,
         removeProd,
         clearCart,
+        updateProdQuantity,
         cart,
         ship,
         totalPrice,

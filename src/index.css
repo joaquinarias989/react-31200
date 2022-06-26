@@ -682,7 +682,7 @@ header .cart__resume__nav {
   }
 }
 header .cart__resume__products {
-  max-height: 39rem;
+  max-height: 36rem;
 }
 header .cart__resume__nav .cart__product .cart__product__img {
   flex-basis: 5%;

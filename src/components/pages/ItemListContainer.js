@@ -1,19 +1,32 @@
 import { Link, NavLink, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { fetchData } from "../../helpers/fetchData";
 import ItemList from "../ItemList";
 import Loading from "../Loading";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { CartContext } from "../../context/cartContext";
 
 const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const { category } = useParams();
+  const { updateProdQuantity } = useContext(CartContext);
 
   useEffect(() => {
     setLoading(true);
-    fetchData(undefined, category)
-      .then((data) => setProducts(data))
-      .catch((err) => alert(err))
+    const db = getFirestore();
+    const query = collection(db, "productos");
+    getDocs(query)
+      .then((data) =>
+        setProducts(
+          data.docs.map((item) => ({
+            id: item.id,
+            quantity: updateProdQuantity(item.id),
+            ...item.data(),
+          }))
+        )
+      )
+      .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   }, [category]);
 

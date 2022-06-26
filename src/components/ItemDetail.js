@@ -6,7 +6,7 @@ import { CartContext } from "../context/cartContext";
 
 const ItemDetail = ({ item }) => {
   const [continueBuy, setContinueBuy] = useState(true);
-  const { addToCart } = useContext(CartContext);
+  const { addToCart, updateProdQuantity } = useContext(CartContext);
 
   const onAdd = (quantity) => {
     setContinueBuy(!continueBuy);
@@ -150,7 +150,7 @@ const ItemDetail = ({ item }) => {
             <ItemCount
               page={"detail"}
               stock={item.stock}
-              initial={item.quantity}
+              initial={updateProdQuantity(item.id)}
               onAdd={onAdd}
             />
           )}
