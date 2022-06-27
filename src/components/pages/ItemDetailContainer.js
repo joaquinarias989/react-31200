@@ -24,7 +24,7 @@ const ItemDetailContainer = () => {
       })
       .catch((err) => alert(err))
       .finally(() => setLoading(false));
-  }, [id, updateProdQuantity]);
+  }, [id]);
 
   return (
     <section className="product container" id="product">

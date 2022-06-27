@@ -5,6 +5,7 @@ import Loading from "../Loading";
 import { CartContext } from "../../context/cartContext";
 import { queryGetProds } from "../../firebase/querys";
 import { getDocs } from "firebase/firestore";
+import FilterProducts from "../FilterProducts";
 const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -49,27 +50,7 @@ const ItemListContainer = () => {
             )}
           </ol>
         </div>
-
-        <div className="col-md-2 d-flex justify-content-end align-items-start">
-          <div className="btn-group">
-            <button
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              aria-label="Filtrar productos"
-            >
-              <i className="fa fa-filter"></i>
-            </button>
-            <div className="dropdown-menu p-4">
-              <h5 className="text-center mb-4">¿Qué estás buscando?</h5>
-              <input
-                className="form__input mt-3"
-                type="search"
-                placeholder="Producto, Categoría, Color..."
-              />
-            </div>
-          </div>
-        </div>
+        <FilterProducts />
       </div>
       {loading ? (
         <Loading />
