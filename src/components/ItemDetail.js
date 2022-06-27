@@ -6,7 +6,7 @@ import { CartContext } from "../context/cartContext";
 
 const ItemDetail = ({ item }) => {
   const [continueBuy, setContinueBuy] = useState(true);
-  const { addToCart, updateProdQuantity } = useContext(CartContext);
+  const { addToCart } = useContext(CartContext);
 
   const onAdd = (quantity) => {
     setContinueBuy(!continueBuy);
@@ -56,25 +56,13 @@ const ItemDetail = ({ item }) => {
           >
             <div className="carousel-inner">
               <div className="carousel-item active">
-                <img
-                  src={item.img}
-                  className="d-block w-100"
-                  alt="Hombre parado con las manos en los bolsillos traseros, vistiendo una remera negra con el texto Phenomenally Black "
-                />
+                <img src={item.img} className="d-block w-100" alt="" />
               </div>
               <div className="carousel-item">
-                <img
-                  src={item.img}
-                  className="d-block w-100"
-                  alt="Hombre parado con las manos en los bolsillos traseros, vistiendo una remera negra con el texto Phenomenally Black "
-                />
+                <img src={item.img} className="d-block w-100" alt="" />
               </div>
               <div className="carousel-item">
-                <img
-                  src={item.img}
-                  className="d-block w-100"
-                  alt="Hombre parado con las manos en los bolsillos traseros, vistiendo una remera negra con el texto Phenomenally Black "
-                />
+                <img src={item.img} className="d-block w-100" alt="" />
               </div>
             </div>
             <button
@@ -150,7 +138,7 @@ const ItemDetail = ({ item }) => {
             <ItemCount
               page={"detail"}
               stock={item.stock}
-              initial={updateProdQuantity(item.id)}
+              initial={item.quantity}
               onAdd={onAdd}
             />
           )}

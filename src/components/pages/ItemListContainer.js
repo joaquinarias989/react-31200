@@ -1,11 +1,10 @@
 import { Link, NavLink, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { fetchData } from "../../helpers/fetchData";
 import ItemList from "../ItemList";
 import Loading from "../Loading";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { CartContext } from "../../context/cartContext";
-
+import { queryGetProds } from "../../firebase/querys";
+import { getDocs } from "firebase/firestore";
 const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,9 +13,7 @@ const ItemListContainer = () => {
 
   useEffect(() => {
     setLoading(true);
-    const db = getFirestore();
-    const query = collection(db, "productos");
-    getDocs(query)
+    getDocs(queryGetProds(undefined, category))
       .then((data) =>
         setProducts(
           data.docs.map((item) => ({
@@ -28,7 +25,7 @@ const ItemListContainer = () => {
       )
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
-  }, [category]);
+  }, [category, updateProdQuantity]);
 
   return (
     <section id="products" className="products container">
@@ -78,7 +75,7 @@ const ItemListContainer = () => {
         <Loading />
       ) : products.length === 0 ? (
         <div className="center-50">
-          <h2>No poseemos {category} en stock por el momento.</h2>
+          <h2>No tenemos {category} en stock por el momento.</h2>
           <Link
             to="/Productos"
             className="position-relative text-overline px-3 mt-2 fw-bold"

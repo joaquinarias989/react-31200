@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams, NavLink } from "react-router-dom";
-import { fetchData } from "../../helpers/fetchData";
 import ItemDetail from "../ItemDetail";
 import Loading from "../Loading";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+import { getDoc } from "firebase/firestore";
 import { CartContext } from "../../context/cartContext";
+import { queryGetProds } from "../../firebase/querys";
 
 const ItemDetailContainer = () => {
   const [prod, setProd] = useState({});
@@ -14,9 +14,7 @@ const ItemDetailContainer = () => {
 
   useEffect(() => {
     setLoading(true);
-    const db = getFirestore();
-    const query = doc(db, "productos", id);
-    getDoc(query)
+    getDoc(queryGetProds(id))
       .then((resp) => {
         setProd({
           id: resp.id,
@@ -26,10 +24,10 @@ const ItemDetailContainer = () => {
       })
       .catch((err) => alert(err))
       .finally(() => setLoading(false));
-  }, [id]);
+  }, [id, updateProdQuantity]);
 
   return (
-    <section className="product container">
+    <section className="product container" id="product">
       <div className="section__header">
         <h1 className="title-underlined">
           {loading ? "Cargando producto..." : prod.title}

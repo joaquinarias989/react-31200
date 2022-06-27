@@ -1,10 +1,19 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 export const CartContext = createContext([]);
 
 export const CartContextProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    localStorage.getItem("cart") &&
+      setCart(JSON.parse(localStorage.getItem("cart")));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const ship = 475;
   let totalPrice = cart.reduce(
