@@ -36,13 +36,7 @@ const CartResume = ({ type }) => {
       </div>
       <div className="cart__total flex-row flex-wrap jc-between algn-items-center">
         <h2 className="text-overline">TOTAL</h2>
-        <h2 className="text-overline">
-          ${" "}
-          {cart.reduce(
-            (acc, { quantity, price }) => acc + quantity * price + ship,
-            0
-          )}
-        </h2>
+        <h2 className="text-overline">$ {totalPrice + ship}</h2>
       </div>
     </>
   ) : (
