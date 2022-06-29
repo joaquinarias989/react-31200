@@ -21,7 +21,7 @@ const Item = memo(({ item }) => {
           <h4 className="product__card__price">$ {item.price}</h4>
         </div>
       </Link>
-      <ItemCount stock={item.stock} initial={item.quantity} onAdd={onAdd} />
+      <ItemCount stock={item.stock} onAdd={onAdd} />
     </article>
   );
 });

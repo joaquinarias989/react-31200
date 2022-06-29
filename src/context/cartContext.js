@@ -16,18 +16,26 @@ export const CartContextProvider = ({ children }) => {
   }, [cart]);
 
   const ship = 475;
-  let totalPrice = cart.reduce(
+  let subtotalPrice = cart.reduce(
     (acc, { quantity, price }) => acc + quantity * price,
     0
   );
+  let totalPrice = subtotalPrice + ship;
   let totalQuantity = cart.reduce((acc, { quantity }) => acc + quantity, 0);
 
   const addToCart = (item, quantity) => {
+    if (item.quantity + quantity > item.stock) {
+      return toast.error("No tenemos mas stock del producto");
+    }
     if (cart.some((p) => p.id === item.id)) {
-      cart.find((p) => p.id === item.id).quantity = quantity;
+      const prod = cart.find((p) => p.id === item.id);
+      item.quantity += quantity;
+      prod.quantity += quantity;
+      // prod.stock -= quantity;
       setCart([...cart]);
     } else {
       item.quantity = quantity;
+      // item.stock -= quantity;
       setCart([...cart, item]);
     }
     toast.success(`${item.title} (${quantity}) agregado exitosamente!`);
@@ -87,6 +95,7 @@ export const CartContextProvider = ({ children }) => {
         updateProdQuantity,
         cart,
         ship,
+        subtotalPrice,
         totalPrice,
         totalQuantity,
       }}

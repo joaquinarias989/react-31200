@@ -4,7 +4,8 @@ import { CartContext } from "../context/cartContext";
 import CartItem from "./CartItem";
 
 const CartResume = ({ type }) => {
-  const { cart, ship, clearCart, totalPrice } = useContext(CartContext);
+  const { cart, ship, clearCart, subtotalPrice, totalPrice } =
+    useContext(CartContext);
 
   return cart.length < 1 ? (
     <div className="text-center">
@@ -28,7 +29,7 @@ const CartResume = ({ type }) => {
       </button>
       <div className="cart__subtotal flex-column">
         <h4 className="flex-row jc-between algn-items-center">
-          Subtotal <span>$ {totalPrice}</span>
+          Subtotal <span>$ {subtotalPrice}</span>
         </h4>
         <h4 className="flex-row jc-between algn-items-center">
           Costo de Envío <span>$ {ship}</span>
@@ -36,7 +37,7 @@ const CartResume = ({ type }) => {
       </div>
       <div className="cart__total flex-row flex-wrap jc-between algn-items-center">
         <h2 className="text-overline">TOTAL</h2>
-        <h2 className="text-overline">$ {totalPrice + ship}</h2>
+        <h2 className="text-overline">$ {totalPrice}</h2>
       </div>
     </>
   ) : (

@@ -26,7 +26,7 @@ const ItemListContainer = () => {
       )
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
-  }, [category, updateProdQuantity]);
+  }, [category]);
 
   return (
     <section id="products" className="products container">
