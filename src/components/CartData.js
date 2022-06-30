@@ -76,6 +76,7 @@ const CartData = () => {
       setLoading(false);
       return toast.success("Compra realizada exitosamente!");
     } catch (error) {
+      setLoading(false);
       console.log(error);
       return toast.error("Algo salió mal, por favor, intenta nuevamente");
     }

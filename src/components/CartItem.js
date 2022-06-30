@@ -10,7 +10,7 @@ const CartItem = ({ item }) => {
       <div className="cart__product__img">
         <img src={item.img} alt="" />
         <button onClick={() => removeProd(item)}>
-          <i className="fa fa-times"></i>
+          <i className="fa fa-trash"></i>
         </button>
       </div>
 
