@@ -56,25 +56,13 @@ const ItemDetail = ({ item }) => {
           >
             <div className="carousel-inner">
               <div className="carousel-item active">
-                <img
-                  src={item.img}
-                  className="d-block w-100"
-                  alt="Hombre parado con las manos en los bolsillos traseros, vistiendo una remera negra con el texto Phenomenally Black "
-                />
+                <img src={item.img} className="d-block w-100" alt="" />
               </div>
               <div className="carousel-item">
-                <img
-                  src={item.img}
-                  className="d-block w-100"
-                  alt="Hombre parado con las manos en los bolsillos traseros, vistiendo una remera negra con el texto Phenomenally Black "
-                />
+                <img src={item.img} className="d-block w-100" alt="" />
               </div>
               <div className="carousel-item">
-                <img
-                  src={item.img}
-                  className="d-block w-100"
-                  alt="Hombre parado con las manos en los bolsillos traseros, vistiendo una remera negra con el texto Phenomenally Black "
-                />
+                <img src={item.img} className="d-block w-100" alt="" />
               </div>
             </div>
             <button

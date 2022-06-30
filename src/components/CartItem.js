@@ -9,6 +9,9 @@ const CartItem = ({ item }) => {
     <div className="cart__product" key={item.id}>
       <div className="cart__product__img">
         <img src={item.img} alt="" />
+        <button onClick={() => removeProd(item)}>
+          <i className="fa fa-times"></i>
+        </button>
       </div>
 
       <div className="cart__product__info">

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 export const CartContext = createContext([]);
@@ -6,23 +6,39 @@ export const CartContext = createContext([]);
 export const CartContextProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
+  useEffect(() => {
+    localStorage.getItem("cart") &&
+      setCart(JSON.parse(localStorage.getItem("cart")));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
   const ship = 475;
-  let totalPrice = cart.reduce(
+  let subtotalPrice = cart.reduce(
     (acc, { quantity, price }) => acc + quantity * price,
     0
   );
+  let totalPrice = subtotalPrice + ship;
   let totalQuantity = cart.reduce((acc, { quantity }) => acc + quantity, 0);
 
   const addToCart = (item, quantity) => {
-    if (cart.includes(item)) {
-      cart.find((p) => p.id === item.id).quantity = quantity;
+    if (item.quantity + quantity > item.stock) {
+      return toast.error("No tenemos mas stock del producto");
+    }
+    if (cart.some((p) => p.id === item.id)) {
+      const prod = cart.find((p) => p.id === item.id);
+      item.quantity += quantity;
+      prod.quantity += quantity;
+      // prod.stock -= quantity;
       setCart([...cart]);
     } else {
       item.quantity = quantity;
+      // item.stock -= quantity;
       setCart([...cart, item]);
     }
-
-    toast.success(`${item.title} (${item.quantity}) agregado exitosamente!`);
+    toast.success(`${item.title} (${quantity}) agregado exitosamente!`);
   };
 
   const addOne = (item) => {
@@ -60,6 +76,14 @@ export const CartContextProvider = ({ children }) => {
     setCart([]);
   };
 
+  const updateProdQuantity = (idProd) => {
+    const prod = cart.find((p) => p.id === idProd);
+    if (prod) {
+      return prod.quantity;
+    }
+    return 0;
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -68,8 +92,10 @@ export const CartContextProvider = ({ children }) => {
         reduceOne,
         removeProd,
         clearCart,
+        updateProdQuantity,
         cart,
         ship,
+        subtotalPrice,
         totalPrice,
         totalQuantity,
       }}
