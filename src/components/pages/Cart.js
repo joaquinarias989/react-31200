@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { CartContext } from "../../context/cartContext";
-import CartData from "../CartData";
+import CartForm from "../CartForm";
 import CartResume from "../CartResume";
 
 const Cart = () => {
@@ -36,7 +36,7 @@ const Cart = () => {
         ) : (
           <>
             <article className="cart__data col-md-6 flex-column">
-              <CartData />
+              <CartForm />
             </article>
             <article className="cart__resume ps-md-5 ps-xl-0 col-md-6 col-xl-4 flex-column">
               <CartResume type={"page"} />
