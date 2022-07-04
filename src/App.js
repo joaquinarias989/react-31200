@@ -6,9 +6,7 @@ import ItemDetailContainer from "./components/pages/ItemDetailContainer";
 import Footer from "./components/shared/Footer";
 import Home from "./components/pages/Home";
 import Cart from "./components/pages/Cart";
-import "react-toastify/dist/ReactToastify.css";
 import { CartContextProvider } from "./context/cartContext";
-import { ToastContainer } from "react-toastify";
 import Categories from "./components/pages/Categories";
 import NotFound from "./components/pages/NotFound";
 
@@ -38,7 +36,6 @@ function App() {
           </main>
           <Footer />
         </CartContextProvider>
-        <ToastContainer />
       </BrowserRouter>
     </>
   );
