@@ -93,6 +93,7 @@ const CartForm = () => {
             </p>
           </>
         ),
+        confirmButtonText: "Listo",
         icon: "success",
       });
     } catch (error) {
