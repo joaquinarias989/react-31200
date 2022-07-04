@@ -20,7 +20,7 @@ const ItemDetailContainer = () => {
         resp._document
           ? setProd({
               id: resp.id,
-              quantity: updateProdQuantity(resp.id),
+              quantity: updateProdQuantity(resp),
               ...resp.data(),
             })
           : navigate("/404");

@@ -208,7 +208,7 @@ const Home = () => {
                   name="name"
                   id="name"
                   className="form__input"
-                  required=""
+                  required
                 />
               </div>
               <div className="input__box">
@@ -220,7 +220,7 @@ const Home = () => {
                   name="email"
                   id="email"
                   className="form__input"
-                  required=""
+                  required
                 />
               </div>
               <div className="input__box">
@@ -231,7 +231,7 @@ const Home = () => {
                   className="form__input"
                   rows="6"
                   column="10"
-                  required=""
+                  required
                 ></textarea>
               </div>
               <button type="submit" className="btn-principal">

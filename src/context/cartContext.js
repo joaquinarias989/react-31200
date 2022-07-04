@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 export const CartContext = createContext([]);
 
@@ -15,6 +15,14 @@ export const CartContextProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    showCloseButton: true,
+    timer: 2000,
+    timerProgressBar: true,
+  });
   const ship = 475;
   let subtotalPrice = cart.reduce(
     (acc, { quantity, price }) => acc + quantity * price,
@@ -24,28 +32,46 @@ export const CartContextProvider = ({ children }) => {
   let totalQuantity = cart.reduce((acc, { quantity }) => acc + quantity, 0);
 
   const addToCart = (item, quantity) => {
-    if (item.quantity + quantity > item.stock) {
-      return toast.error("No tenemos mas stock del producto");
+    if (quantity > item.stock) {
+      return Toast.fire({
+        icon: "error",
+        title: "No tenemos más stock del producto",
+      });
     }
-    if (cart.some((p) => p.id === item.id)) {
-      const prod = cart.find((p) => p.id === item.id);
-      item.quantity += quantity;
+    const prod = cart.find((p) => p.id === item.id);
+    if (prod) {
+      if (prod.quantity + quantity > item.stock) {
+        return Toast.fire({
+          icon: "error",
+          title: "No tenemos más stock del producto",
+        });
+      }
       prod.quantity += quantity;
+      item.quantity = prod.quantity;
       // prod.stock -= quantity;
       setCart([...cart]);
     } else {
       item.quantity = quantity;
-      // item.stock -= quantity;
       setCart([...cart, item]);
     }
-    toast.success(`${item.title} (${quantity}) agregado exitosamente!`);
+
+    return Toast.fire({
+      icon: "success",
+      title: `${item.title} (${quantity}) agregado exitosamente!`,
+    });
   };
 
   const addOne = (item) => {
-    if (!cart.includes(item))
-      return toast.error("El producto no se encuentra en el carrito");
-    if (item.quantity === item.stock)
-      return toast.warning("No tenemos más stock del producto");
+    if (!cart.some((p) => p.id === item.id))
+      return Toast.fire({
+        icon: "error",
+        title: `El producto no se encuentra en el carrito`,
+      });
+    if (item.quantity >= item.stock)
+      return Toast.fire({
+        icon: "error",
+        title: `No tenemos más stock del producto`,
+      });
 
     item.quantity++;
     setCart([...cart]);
@@ -53,7 +79,10 @@ export const CartContextProvider = ({ children }) => {
 
   const reduceOne = (item) => {
     if (!cart.includes(item))
-      return toast.error("El producto no se encuentra en el carrito");
+      return Toast.fire({
+        icon: "error",
+        title: `El producto no se encuentra en el carrito`,
+      });
     if (item.quantity === 0) return removeProd(item);
 
     item.quantity--;
@@ -70,16 +99,21 @@ export const CartContextProvider = ({ children }) => {
 
   const clearCart = () => {
     if (cart.length < 0)
-      return toast.error(`El carrito no posee ningún producto`);
+      return Toast.fire({
+        icon: "error",
+        title: `El carrito no posee ningún producto`,
+      });
 
     cart.forEach((prod) => (prod.quantity = 0));
     setCart([]);
   };
 
-  const updateProdQuantity = (idProd) => {
-    const prod = cart.find((p) => p.id === idProd);
-    if (prod) {
-      return prod.quantity;
+  const updateProdQuantity = (item) => {
+    if (cart.some((p) => p.id === item.id)) {
+      const prod = cart.find((p) => p.id === item.id);
+      if (prod) {
+        return prod.quantity;
+      }
     }
     return 0;
   };

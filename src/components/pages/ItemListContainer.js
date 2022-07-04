@@ -19,7 +19,7 @@ const ItemListContainer = () => {
         setProducts(
           data.docs.map((item) => ({
             id: item.id,
-            quantity: updateProdQuantity(item.id),
+            quantity: updateProdQuantity(item),
             ...item.data(),
           }))
         )
@@ -42,7 +42,9 @@ const ItemListContainer = () => {
                 <li>
                   <NavLink to="/Productos">Productos</NavLink>
                 </li>
-                <li>Categorías</li>
+                <li>
+                  <NavLink to="/Productos/Categorias"> Categorías</NavLink>
+                </li>
                 <li>{category}</li>
               </>
             ) : (
