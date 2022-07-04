@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, NavLink, useNavigate } from "react-router-dom";
 import ItemDetail from "../ItemDetail";
 import Loading from "../Loading";
 import { getDoc } from "firebase/firestore";
@@ -11,18 +11,21 @@ const ItemDetailContainer = () => {
   const [loading, setLoading] = useState(Boolean);
   const { id } = useParams();
   const { updateProdQuantity } = useContext(CartContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
     getDoc(queryGetProds(id))
       .then((resp) => {
-        setProd({
-          id: resp.id,
-          quantity: updateProdQuantity(resp.id),
-          ...resp.data(),
-        });
+        resp._document
+          ? setProd({
+              id: resp.id,
+              quantity: updateProdQuantity(resp.id),
+              ...resp.data(),
+            })
+          : navigate("/404");
       })
-      .catch((err) => alert(err))
+      .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   }, [id]);
 
@@ -39,6 +42,14 @@ const ItemDetailContainer = () => {
           </li>
           <li>
             <NavLink to={"/Productos"}>Productos</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/Productos/Categorias"}>Categorias</NavLink>
+          </li>
+          <li>
+            <NavLink to={`/Productos/Categorias/${prod.category}`}>
+              {prod.category}
+            </NavLink>
           </li>
           <li>{prod.title}</li>
         </ol>

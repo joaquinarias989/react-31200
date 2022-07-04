@@ -11,13 +11,13 @@ import {
   where,
   writeBatch,
 } from "firebase/firestore";
-import { toast } from "react-toastify";
-// import Swal from "sweetalert2";
-// import withReactContent from "sweetalert2-react-content";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
 
 const CartForm = () => {
   const [loading, setLoading] = useState(false);
   const { cart, ship, totalPrice, clearCart } = useContext(CartContext);
+  const MySwal = withReactContent(Swal);
 
   const handlePurchase = async (e) => {
     e.preventDefault();
@@ -51,7 +51,9 @@ const CartForm = () => {
       };
       const orderCollection = collection(db, "orders");
       const orderRef = doc(orderCollection);
-      batch.set(orderRef, order);
+      const resOrder = batch.set(orderRef, order);
+      const idOrder = resOrder._mutations[0].key.path.segments[1];
+      console.log(idOrder);
       //No hago addDoc porque eso agrega la orden directamente, y yo lo que quiero es guardarla en la transaccion hasta hacer el commit.
       //Ya que en caso de error en la parte de actualizar stock, la "transaccion" tiraría error y no se crearía ni la orden ni se actualizaría stock.
 
@@ -73,27 +75,30 @@ const CartForm = () => {
           })
         );
       });
+
       await batch.commit();
+
       clearCart();
+
       setLoading(false);
 
-      // const MySwal = withReactContent(Swal);
-
-      // MySwal.fire({
-      //   title: <h3>Compra exitosa!</h3>,
-      //   html: (
-      //     <div>
-      //       <p>Nº Transaccion:</p>
-      //       <i>#12431354262</i>
-      //     </div>
-      //   ),
-      //   icon: "success",
-      // });
-      return toast.success("Compra realizada exitosamente!");
+      return MySwal.fire({
+        title: <h2>Compra realizada exitosamente!</h2>,
+        html: (
+          <>
+            <strong>Cód. de Transaccion:</strong>
+            <i># {idOrder}</i>
+          </>
+        ),
+        icon: "success",
+      });
     } catch (error) {
       setLoading(false);
       console.log(error);
-      return toast.error("Algo salió mal, por favor, intenta nuevamente");
+      return MySwal.fire({
+        title: <h2>Algo salió mal, por favor, intenta nuevamente</h2>,
+        icon: "error",
+      });
     }
   };
 

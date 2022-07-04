@@ -9,6 +9,8 @@ import Cart from "./components/pages/Cart";
 import "react-toastify/dist/ReactToastify.css";
 import { CartContextProvider } from "./context/cartContext";
 import { ToastContainer } from "react-toastify";
+import Categories from "./components/pages/Categories";
+import NotFound from "./components/pages/NotFound";
 
 function App() {
   return (
@@ -29,7 +31,9 @@ function App() {
                 element={<ItemDetailContainer />}
               />
               <Route path={"/Carrito"} element={<Cart />} />
-              <Route path={"*"} element={<Navigate to="/" replace />} />
+              <Route path={"/Productos/Categorias"} element={<Categories />} />
+              <Route path={"/404"} element={<NotFound />} />
+              <Route path={"*"} element={<Navigate to="/404" replace />} />
             </Routes>
           </main>
           <Footer />

@@ -156,7 +156,15 @@ select:-webkit-autofill:focus {
     width: 95%;
   }
 }
-
+.container-center {
+  height: calc(100vh - 75.13px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 5rem;
+}
 .flex-row {
   display: flex;
 }
@@ -1683,6 +1691,9 @@ main.bg-bricks {
   .register .text-leftline::before {
     width: 0;
   }
+}
+.swal2-popup{
+  font-size: 1em !important;
 }
 
 /*    ANIMACIONES    */

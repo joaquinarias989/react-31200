@@ -54,7 +54,7 @@ export const CartContextProvider = ({ children }) => {
   const reduceOne = (item) => {
     if (!cart.includes(item))
       return toast.error("El producto no se encuentra en el carrito");
-    if (item.quantity === 0) removeProd(item);
+    if (item.quantity === 0) return removeProd(item);
 
     item.quantity--;
     setCart([...cart]);
