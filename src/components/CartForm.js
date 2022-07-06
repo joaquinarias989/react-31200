@@ -30,7 +30,7 @@ const CartForm = () => {
         buyer: {
           name: e.target.elements.name.value,
           email: e.target.elements.email.value,
-          codPostal: e.target.elements.postalcode.value,
+          postalCode: e.target.elements.postalcode.value,
           province: e.target.elements.province.value,
           address: e.target.elements.address.value,
           department: e.target.elements.department.value,
@@ -52,9 +52,9 @@ const CartForm = () => {
       const orderCollection = collection(db, "orders");
       const orderRef = doc(orderCollection);
       const resOrder = batch.set(orderRef, order);
-      const idOrder = resOrder._mutations[0].key.path.segments[1];
-      //No hago addDoc porque eso agrega la orden directamente, y yo lo que quiero es guardarla en la transaccion hasta hacer el commit.
+      //No hago addDoc porque eso agrega la orden directamente, y yo lo que quiero es "guardarla" en la transaccion hasta hacer el commit.
       //Ya que en caso de error en la parte de actualizar stock, la "transaccion" tiraría error y no se crearía ni la orden ni se actualizaría stock.
+      const idOrder = resOrder._mutations[0].key.path.segments[1];
 
       const prodsCollection = collection(db, "productos");
       const q = await query(

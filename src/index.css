@@ -636,10 +636,22 @@ header .navbar-nav .dropdown-link .sub-menu {
   left: -2rem;
   padding: 0 1rem 0 0.5rem;
   border-bottom: 5px solid #ffda07;
+  clip-path: polygon(
+    50% 0,
+    99% 0,
+    100% 17%,
+    99% 56%,
+    100% 90%,
+    93% 100%,
+    1% 100%,
+    0 59%,
+    0 25%,
+    0 1%
+  );
   transition: all 0.3s ease-in-out;
 }
-header .navbar-nav .dropdown-link .sub-menu .menu__link {
-  padding: 1rem;
+header .navbar-nav .dropdown-link .sub-menu__categories{
+  width: clamp(20rem, 25rem, 30vw);
 }
 header .navbar-nav .dropdown-link:hover .sub-menu {
   opacity: 1;
@@ -1370,6 +1382,10 @@ main.bg-bricks {
   .product__main .product__details .product__quantity input {
     width: 100%;
   }
+}
+
+.categories{
+  padding: 5rem 0;
 }
 
 .interes .container {

@@ -42,7 +42,7 @@ const NavBar = () => {
               >
                 Productos
               </NavLink>
-              <ul className="sub-menu bg-bricks">
+              <ul className="sub-menu sub-menu__categories bg-bricks">
                 <li>
                   <NavLink
                     to="/Productos/Categorias/Remeras"
@@ -55,22 +55,22 @@ const NavBar = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="/Productos/Categorias/Pantalones"
-                    className={({ isActive }) =>
-                      isActive ? "menu__link menu__link--active" : "menu__link"
-                    }
-                  >
-                    Pantalones
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
                     to="/Productos/Categorias/Abrigos"
                     className={({ isActive }) =>
                       isActive ? "menu__link menu__link--active" : "menu__link"
                     }
                   >
                     Abrigos
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/Productos/Categorias/"
+                    className={({ isActive }) =>
+                      isActive ? "menu__link menu__link--active" : "menu__link"
+                    }
+                  >
+                    Ver todas las categorías
                   </NavLink>
                 </li>
               </ul>
