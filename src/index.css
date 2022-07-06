@@ -146,9 +146,6 @@ select:-webkit-autofill:focus {
 
 /*   HELPERS   */
 .container {
-  width: 90%;
-  max-width: 145rem;
-  margin: 0 auto;
   overflow: hidden;
 }
 @media (max-width: 425px) {

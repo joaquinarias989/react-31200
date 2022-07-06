@@ -4,29 +4,87 @@ import ItemList from "../ItemList";
 import Loading from "../Loading";
 import { CartContext } from "../../context/cartContext";
 import { queryGetProds } from "../../firebase/querys";
-import { getDocs } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  getFirestore,
+  limit,
+  query,
+  startAfter,
+  where,
+} from "firebase/firestore";
 import FilterProducts from "../FilterProducts";
+import Swal from "sweetalert2";
 const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [lastDoc, setLastDoc] = useState();
+  const [showButton, setShowButton] = useState(true);
   const { category } = useParams();
   const { updateProdQuantity } = useContext(CartContext);
 
   useEffect(() => {
     setLoading(true);
     getDocs(queryGetProds(undefined, category))
-      .then((data) =>
+      .then((data) => {
         setProducts(
           data.docs.map((item) => ({
             id: item.id,
             quantity: updateProdQuantity(item),
             ...item.data(),
           }))
-        )
-      )
+        );
+        setLastDoc(data.docs[data.docs.length - 1]);
+      })
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   }, [category]);
+
+  const loadMore = () => {
+    const db = getFirestore();
+    let qry;
+    if (category) {
+      qry = query(
+        collection(db, "productos"),
+        where("category", "==", category),
+        startAfter(lastDoc),
+        limit(2)
+      );
+    } else {
+      qry = query(collection(db, "productos"), startAfter(lastDoc), limit(2));
+    }
+    getDocs(qry)
+      .then((data) => {
+        if (data.size > 0)
+          setProducts([
+            ...products,
+            ...data.docs.map((item) => ({
+              id: item.id,
+              quantity: updateProdQuantity(item),
+              ...item.data(),
+            })),
+          ]);
+        else {
+          setShowButton(false);
+          Toast.fire({
+            icon: "warning",
+            title: `Has cargado todos los productos`,
+          });
+        }
+        setLastDoc(data.docs[data.docs.length - 1]);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
+  };
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    showCloseButton: true,
+    timer: 2000,
+    timerProgressBar: true,
+  });
 
   return (
     <section id="products" className="products container">
@@ -67,7 +125,18 @@ const ItemListContainer = () => {
           </Link>
         </div>
       ) : (
-        <ItemList items={products} />
+        <>
+          <ItemList items={products} />
+          <div className="flex-row jc-center algn-items-center">
+            <button
+              className="btn-principal"
+              onClick={loadMore}
+              aria-label="Cargar más productos"
+            >
+              <i className="fas fa-plus"></i> Cargar más
+            </button>
+          </div>
+        </>
       )}
     </section>
   );

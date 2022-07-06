@@ -2,6 +2,7 @@ import {
   collection,
   doc,
   getFirestore,
+  limit,
   query,
   where,
 } from "firebase/firestore";
@@ -14,8 +15,9 @@ export const queryGetProds = (id, category) => {
     : category
     ? (qry = query(
         collection(db, "productos"),
-        where("category", "==", category)
+        where("category", "==", category),
+        limit(2)
       ))
-    : (qry = collection(db, "productos"));
+    : (qry = query(collection(db, "productos"), limit(2)));
   return qry;
 };

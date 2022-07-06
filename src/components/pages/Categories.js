@@ -40,7 +40,7 @@ const Categories = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div className="d-flex flex-wrap justify-content-md-start justify-content-center gap-4">
+        <div className="d-flex flex-wrap justify-content-md-start justify-content-center gap-4 pt-3">
           {categories.map((category) => (
             <article className="product__card" key={category.id}>
               <Link to={`/Productos/Categorias/${category.name}`}>
