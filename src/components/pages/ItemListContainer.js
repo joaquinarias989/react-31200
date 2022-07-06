@@ -19,7 +19,6 @@ const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [lastDoc, setLastDoc] = useState();
-  const [showButton, setShowButton] = useState(true);
   const { category } = useParams();
   const { updateProdQuantity } = useContext(CartContext);
 
@@ -65,7 +64,6 @@ const ItemListContainer = () => {
             })),
           ]);
         else {
-          setShowButton(false);
           Toast.fire({
             icon: "warning",
             title: `Has cargado todos los productos`,
