@@ -18,6 +18,7 @@ import Swal from "sweetalert2";
 const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadButton, setLoadButton] = useState(false);
   const [lastDoc, setLastDoc] = useState();
   const { category } = useParams();
   const { updateProdQuantity } = useContext(CartContext);
@@ -40,6 +41,7 @@ const ItemListContainer = () => {
   }, [category]);
 
   const loadMore = () => {
+    setLoadButton(true);
     const db = getFirestore();
     let qry;
     if (category) {
@@ -54,7 +56,7 @@ const ItemListContainer = () => {
     }
     getDocs(qry)
       .then((data) => {
-        if (data.size > 0)
+        if (data.size > 0) {
           setProducts([
             ...products,
             ...data.docs.map((item) => ({
@@ -63,16 +65,19 @@ const ItemListContainer = () => {
               ...item.data(),
             })),
           ]);
-        else {
+          setLastDoc(data.docs[data.docs.length - 1]);
+        } else {
           Toast.fire({
             icon: "warning",
             title: `Has cargado todos los productos`,
           });
         }
-        setLastDoc(data.docs[data.docs.length - 1]);
       })
-      .catch((err) => console.log(err))
-      .finally(() => setLoading(false));
+      .catch((err) => {
+        setLoadButton(false);
+        console.log(err);
+      })
+      .finally(() => setLoadButton(false));
   };
 
   const Toast = Swal.mixin({
@@ -126,13 +131,19 @@ const ItemListContainer = () => {
         <>
           <ItemList items={products} />
           <div className="flex-row jc-center algn-items-center">
-            <button
-              className="btn-principal"
-              onClick={loadMore}
-              aria-label="Cargar más productos"
-            >
-              <i className="fas fa-plus"></i> Cargar más
-            </button>
+            {loadButton ? (
+              <button className="btn-principal" aria-label="Cargando" disabled>
+                <i className="fa-solid fa-spinner"></i> Cargando
+              </button>
+            ) : (
+              <button
+                className="btn-principal"
+                onClick={loadMore}
+                aria-label="Cargar más productos"
+              >
+                <i className="fas fa-plus"></i> Cargar más
+              </button>
+            )}
           </div>
         </>
       )}
