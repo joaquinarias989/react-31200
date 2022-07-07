@@ -256,14 +256,25 @@ const CartForm = () => {
               </div>
             </div>
           </div>
-          <button
-            type="submit"
-            className="btn-principal mt-5 w-100"
-            aria-label="Pagar"
-          >
-            <i className="fa fa-money-bill-alt"></i>
-            {loading ? "Procesando compra..." : "Continuar al pago"}
-          </button>
+          {loading ? (
+            <button
+              className="btn-principal mt-5 w-100"
+              aria-label="Procesando compra"
+              disabled
+            >
+              <i className="fa-solid fa-spinner"></i>
+              Procesando compra...
+            </button>
+          ) : (
+            <button
+              type="submit"
+              className="btn-principal mt-5 w-100"
+              aria-label="Pagar"
+            >
+              <i className="fa fa-money-bill-alt"></i>
+              Continuar al pago
+            </button>
+          )}
         </form>
       </div>
     </>

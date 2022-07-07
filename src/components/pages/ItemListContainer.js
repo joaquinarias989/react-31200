@@ -69,7 +69,7 @@ const ItemListContainer = () => {
         } else {
           Toast.fire({
             icon: "warning",
-            title: `Has cargado todos los productos`,
+            title: `No quedan ${category ? category : "productos"} por cargar`,
           });
         }
       })
