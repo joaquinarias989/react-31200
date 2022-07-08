@@ -3,16 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import ItemList from "../ItemList";
 import Loading from "../Loading";
 import { CartContext } from "../../context/cartContext";
-import { queryGetProds } from "../../firebase/querys";
-import {
-  collection,
-  getDocs,
-  getFirestore,
-  limit,
-  query,
-  startAfter,
-  where,
-} from "firebase/firestore";
+import { getMoreProds, getProds } from "../../firebase/querys";
 import FilterProducts from "../FilterProducts";
 import Swal from "sweetalert2";
 const ItemListContainer = () => {
@@ -25,12 +16,12 @@ const ItemListContainer = () => {
 
   useEffect(() => {
     setLoading(true);
-    getDocs(queryGetProds(undefined, category))
+    getProds(undefined, category)
       .then((data) => {
         setProducts(
           data.docs.map((item) => ({
             id: item.id,
-            quantity: updateProdQuantity(item),
+            // quantity: updateProdQuantity(item),
             ...item.data(),
           }))
         );
@@ -42,19 +33,7 @@ const ItemListContainer = () => {
 
   const loadMore = () => {
     setLoadButton(true);
-    const db = getFirestore();
-    let qry;
-    if (category) {
-      qry = query(
-        collection(db, "productos"),
-        where("category", "==", category),
-        startAfter(lastDoc),
-        limit(2)
-      );
-    } else {
-      qry = query(collection(db, "productos"), startAfter(lastDoc), limit(2));
-    }
-    getDocs(qry)
+    getMoreProds(lastDoc, category)
       .then((data) => {
         if (data.size > 0) {
           setProducts([

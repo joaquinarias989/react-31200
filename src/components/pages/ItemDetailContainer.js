@@ -2,9 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { useParams, NavLink, useNavigate } from "react-router-dom";
 import ItemDetail from "../ItemDetail";
 import Loading from "../Loading";
-import { getDoc } from "firebase/firestore";
 import { CartContext } from "../../context/cartContext";
-import { queryGetProds } from "../../firebase/querys";
+import { getProds } from "../../firebase/querys";
 
 const ItemDetailContainer = () => {
   const [prod, setProd] = useState({});
@@ -15,8 +14,9 @@ const ItemDetailContainer = () => {
 
   useEffect(() => {
     setLoading(true);
-    getDoc(queryGetProds(id))
+    getProds(id)
       .then((resp) => {
+        console.log(resp.data());
         resp._document
           ? setProd({
               id: resp.id,
@@ -27,7 +27,7 @@ const ItemDetailContainer = () => {
       })
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
-  }, [id]);
+  }, [id, updateProdQuantity, navigate]);
 
   return (
     <section className="product container" id="product">

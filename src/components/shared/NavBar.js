@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Outlet, NavLink } from "react-router-dom";
 import logo from "../../img/logo.svg";
 import CartWidget from "./CartWidget";
@@ -93,18 +92,18 @@ const NavBar = () => {
           </ul>
           <ul className="navbar-nav mb-2 mb-lg-0">
             <li className="dropdown-link">
-              <a
+              <NavLink
                 className="menu__link"
-                href="."
+                to={"/Ingresar"}
                 role="button"
                 aria-label="Cuenta de Usuario"
               >
                 <i className="fas fa-user text-white"></i>
-              </a>
+              </NavLink>
               <ul className="sub-menu bg-bricks">
                 <li>
                   <NavLink
-                    to="/Login"
+                    to="/Ingresar"
                     className={({ isActive }) =>
                       isActive ? "menu__link menu__link--active" : "menu__link"
                     }
@@ -114,7 +113,7 @@ const NavBar = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="/Register"
+                    to="/Registrarse"
                     className={({ isActive }) =>
                       isActive ? "menu__link menu__link--active" : "menu__link"
                     }

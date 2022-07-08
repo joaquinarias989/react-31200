@@ -4,7 +4,7 @@ import hanger from "../../img/hanger.svg";
 
 const Home = () => {
   return (
-    <div className="bg-bricks">
+    <>
       <section id="welcome" className="welcome">
         <Link type="button" className="btn-principal" to={"/Productos"}>
           <i className="fas fa-shopping-bag me-2"></i> Comprar ahora
@@ -262,7 +262,7 @@ const Home = () => {
           </article>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 
