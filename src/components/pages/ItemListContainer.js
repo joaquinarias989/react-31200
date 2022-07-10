@@ -1,8 +1,7 @@
 import { Link, NavLink, useParams } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ItemList from "../ItemList";
 import Loading from "../Loading";
-import { CartContext } from "../../context/cartContext";
 import { getMoreProds, getProds } from "../../firebase/querys";
 import FilterProducts from "../FilterProducts";
 import Swal from "sweetalert2";
@@ -12,7 +11,6 @@ const ItemListContainer = () => {
   const [loadButton, setLoadButton] = useState(false);
   const [lastDoc, setLastDoc] = useState();
   const { category } = useParams();
-  const { updateProdQuantity } = useContext(CartContext);
 
   useEffect(() => {
     setLoading(true);
@@ -21,7 +19,7 @@ const ItemListContainer = () => {
         setProducts(
           data.docs.map((item) => ({
             id: item.id,
-            // quantity: updateProdQuantity(item),
+            quantity: 0,
             ...item.data(),
           }))
         );
@@ -31,6 +29,14 @@ const ItemListContainer = () => {
       .finally(() => setLoading(false));
   }, [category]);
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    showCloseButton: true,
+    timer: 2000,
+    timerProgressBar: true,
+  });
   const loadMore = () => {
     setLoadButton(true);
     getMoreProds(lastDoc, category)
@@ -40,7 +46,7 @@ const ItemListContainer = () => {
             ...products,
             ...data.docs.map((item) => ({
               id: item.id,
-              quantity: updateProdQuantity(item),
+              quantity: 0,
               ...item.data(),
             })),
           ]);
@@ -54,19 +60,14 @@ const ItemListContainer = () => {
       })
       .catch((err) => {
         setLoadButton(false);
-        console.log(err);
+        return Swal.fire({
+          title: "Algo salió mal",
+          text: "Por favor, intenta nuevamente",
+          icon: "error",
+        });
       })
       .finally(() => setLoadButton(false));
   };
-
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    showCloseButton: true,
-    timer: 2000,
-    timerProgressBar: true,
-  });
 
   return (
     <section id="products" className="products container">

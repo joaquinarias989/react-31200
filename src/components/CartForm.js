@@ -1,110 +1,107 @@
 import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { CartContext } from "../context/cartContext";
-import {
-  collection,
-  doc,
-  documentId,
-  getDocs,
-  getFirestore,
-  query,
-  where,
-  writeBatch,
-} from "firebase/firestore";
+import { createOrder, verifyStock } from "../firebase/querys";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 
 const CartForm = () => {
   const [loading, setLoading] = useState(false);
-  const { cart, ship, totalPrice, clearCart } = useContext(CartContext);
+  const { cart, ship, totalPrice, clearCart, removeProd } =
+    useContext(CartContext);
   const MySwal = withReactContent(Swal);
-
   const handlePurchase = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    try {
-      const db = getFirestore();
-      const batch = writeBatch(db);
-
-      const order = {
-        buyer: {
-          name: e.target.elements.name.value,
-          email: e.target.elements.email.value,
-          postalCode: e.target.elements.postalcode.value,
-          province: e.target.elements.province.value,
-          address: e.target.elements.address.value,
-          department: e.target.elements.department.value,
-          phone: e.target.elements.phone.value,
-          dni: e.target.elements.dni.value,
-        },
-        items: cart.map((item) => ({
-          id: item.id,
-          title: item.title,
-          price: item.price,
-          quantity: item.quantity,
-          img: item.img,
-          size: item.size,
-          color: item.color,
-        })),
-        total: totalPrice,
-        date: new Date(),
-      };
-      const orderCollection = collection(db, "orders");
-      const orderRef = doc(orderCollection);
-      const resOrder = batch.set(orderRef, order);
-      //No hago addDoc porque eso agrega la orden directamente, y yo lo que quiero es "guardarla" en la transaccion hasta hacer el commit.
-      //Ya que en caso de error en la parte de actualizar stock, la "transaccion" tiraría error y no se crearía ni la orden ni se actualizaría stock.
-      const idOrder = resOrder._mutations[0].key.path.segments[1];
-
-      const prodsCollection = collection(db, "productos");
-      const q = await query(
-        prodsCollection,
-        where(
-          documentId(),
-          "in",
-          cart.map((it) => it.id)
-        )
-      );
-      await getDocs(q).then((resp) => {
-        resp.docs.forEach((doc) =>
-          batch.update(doc.ref, {
-            stock:
-              doc.data().stock -
-              cart.find((item) => item.id === doc.id).quantity,
-          })
-        );
-      });
-
-      await batch.commit();
-
-      clearCart();
-
-      setLoading(false);
-
+    const validEmail = verifyEmail(e.target.elements.email.value);
+    if (!validEmail) {
       return MySwal.fire({
-        title: <h2>Compra realizada exitosamente!</h2>,
+        title: <h2>Email incorrecto</h2>,
+        text: "Por favor, ingrese un email válido",
+        icon: "error",
+      });
+    }
+    setLoading(true);
+
+    const prodsOutOfStock = await verifyStock(cart);
+    if (prodsOutOfStock.length > 0) {
+      removeProd(undefined, prodsOutOfStock);
+      setLoading(false);
+      return MySwal.fire({
+        title: <h2>No pudimos avanzar con tu compra</h2>,
         html: (
           <>
-            <strong>Cód. de Transaccion: </strong>
-            <i>#{idOrder}</i>
-            <p className="text-muted mt-1">
-              (Te recomendamos guardar éste codigo ya que puede servirte ante
-              cualquier inconveniente)
+            <p>No tenemos suficiente stock de los siguientes productos:</p>
+            {prodsOutOfStock.map((p) => (
+              <i key={p.id} className="fw-bold">
+                {p.title}
+              </i>
+            ))}
+            <p>
+              Los hemos eliminado del carrito para facilitarle las cosas, probá
+              agregarlos nuevamente y verificá!
             </p>
           </>
         ),
-        confirmButtonText: "Listo",
-        icon: "success",
+        icon: "error",
       });
-    } catch (error) {
+    }
+
+    const order = {
+      buyer: {
+        name: e.target.elements.name.value,
+        email: e.target.elements.email.value,
+        postalCode: e.target.elements.postalcode.value,
+        province: e.target.elements.province.value,
+        address: e.target.elements.address.value,
+        department: e.target.elements.department.value,
+        phone: e.target.elements.phone.value,
+        dni: e.target.elements.dni.value,
+      },
+      items: cart.map((item) => ({
+        id: item.id,
+        title: item.title,
+        price: item.price,
+        quantity: item.quantity,
+        img: item.img,
+        size: item.size,
+        color: item.color,
+      })),
+      total: totalPrice,
+      date: new Date(),
+    };
+    const resp = await createOrder(order, cart);
+    if (resp === "Algo salió mal") {
       setLoading(false);
-      console.log(error);
       return MySwal.fire({
-        title: <h2>Algo salió mal</h2>,
+        title: <h2>{resp}</h2>,
         text: "Por favor, intenta nuevamente",
         icon: "error",
       });
     }
+
+    clearCart();
+    setLoading(false);
+    return MySwal.fire({
+      title: <h2>Compra realizada exitosamente!</h2>,
+      html: (
+        <>
+          <strong>Cód. de Transaccion: </strong>
+          <i>#{resp}</i>
+          <p className="text-muted">
+            (Te recomendamos guardar éste codigo ya que puede servirte ante
+            cualquier inconveniente)
+          </p>
+        </>
+      ),
+      confirmButtonText: "Listo",
+      icon: "success",
+    });
+  };
+
+  const verifyEmail = (email) => {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
   };
 
   return (

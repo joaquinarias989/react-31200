@@ -9,25 +9,23 @@ const ItemDetailContainer = () => {
   const [prod, setProd] = useState({});
   const [loading, setLoading] = useState(Boolean);
   const { id } = useParams();
-  const { updateProdQuantity } = useContext(CartContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
     getProds(id)
       .then((resp) => {
-        console.log(resp.data());
         resp._document
           ? setProd({
               id: resp.id,
-              quantity: updateProdQuantity(resp),
+              quantity: 0,
               ...resp.data(),
             })
           : navigate("/404");
       })
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
-  }, [id, updateProdQuantity, navigate]);
+  }, [id, navigate]);
 
   return (
     <section className="product container" id="product">

@@ -23,6 +23,7 @@ export const CartContextProvider = ({ children }) => {
     timer: 2000,
     timerProgressBar: true,
   });
+
   const ship = 475;
   let subtotalPrice = cart.reduce(
     (acc, { quantity, price }) => acc + quantity * price,
@@ -89,11 +90,19 @@ export const CartContextProvider = ({ children }) => {
     setCart([...cart]);
   };
 
-  const removeProd = (item) => {
-    for (let c = 0; c < cart.length; c++) {
-      cart[c] === item && cart.splice(c, 1);
+  const removeProd = (item, itemsOutStock) => {
+    if (item) {
+      item.quantity && (item.quantity = 0);
+      return setCart(cart.filter((p) => p.id !== item.id));
     }
-    item.quantity = 0;
+
+    for (const itemOutStock of itemsOutStock) {
+      const prodDelete = cart.find((p) => p.id === itemOutStock.id);
+      for (let c = 0; c < cart.length; c++) {
+        cart[c] === prodDelete && cart.splice(c, 1);
+        itemOutStock.quantity && (itemOutStock.quantity = 0);
+      }
+    }
     setCart([...cart]);
   };
 

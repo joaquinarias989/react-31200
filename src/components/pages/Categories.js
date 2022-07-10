@@ -1,6 +1,6 @@
-import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { getCategories } from "../../firebase/querys";
 import Loading from "../Loading";
 
 const Categories = () => {
@@ -9,8 +9,7 @@ const Categories = () => {
 
   useEffect(() => {
     setLoading(true);
-    const db = getFirestore();
-    getDocs(collection(db, "categories"))
+    getCategories()
       .then((data) =>
         setCategory(
           data.docs.map((c) => ({
