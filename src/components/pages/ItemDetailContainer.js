@@ -1,13 +1,12 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, NavLink, useNavigate } from "react-router-dom";
 import ItemDetail from "../ItemDetail";
 import Loading from "../Loading";
-import { CartContext } from "../../context/cartContext";
 import { getProds } from "../../firebase/querys";
 
 const ItemDetailContainer = () => {
   const [prod, setProd] = useState({});
-  const [loading, setLoading] = useState(Boolean);
+  const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const navigate = useNavigate();
 

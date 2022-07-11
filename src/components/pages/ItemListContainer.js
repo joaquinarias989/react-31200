@@ -69,6 +69,28 @@ const ItemListContainer = () => {
       .finally(() => setLoadButton(false));
   };
 
+  const filterProds = (value) => {
+    const oldProds = [...products];
+    let query = value.trim().toLowerCase();
+    if (query.length > 0) {
+      const filteredProds = products.filter((prod) =>
+        prod.title.trim().toLowerCase().includes(query)
+      );
+      setProducts(filteredProds);
+    } else {
+      getProds(undefined, category).then((data) => {
+        setProducts(
+          data.docs.map((item) => ({
+            id: item.id,
+            quantity: 0,
+            ...item.data(),
+          }))
+        );
+        setLastDoc(data.docs[data.docs.length - 1]);
+      });
+    }
+  };
+
   return (
     <section id="products" className="products container">
       <div className="section__header row">
@@ -93,7 +115,7 @@ const ItemListContainer = () => {
             )}
           </ol>
         </div>
-        <FilterProducts />
+        <FilterProducts filterProds={filterProds} />
       </div>
       {loading ? (
         <Loading />

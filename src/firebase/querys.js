@@ -37,6 +37,14 @@ export const getMoreProds = async (lastDoc, category) => {
       )
     : await getDocs(query(prodsRef, startAfter(lastDoc), limitCondition));
 };
+export const getProdsFiltered = async (filter) => {
+  const queryProds = query(
+    prodsRef,
+    where("title", "==", filter),
+    limitCondition
+  );
+  return await getDocs(queryProds);
+};
 export const getCategories = async () => {
   return await getDocs(collection(firestoreDB, "categories"));
 };

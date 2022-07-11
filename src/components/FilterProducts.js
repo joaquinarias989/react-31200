@@ -1,4 +1,6 @@
-const FilterProducts = ({ onChange }) => {
+import { useEffect, useState } from "react";
+
+const FilterProducts = ({ filterProds }) => {
   return (
     <div className="col-md-2 d-flex justify-content-end align-items-start">
       <div className="btn-group">
@@ -16,7 +18,7 @@ const FilterProducts = ({ onChange }) => {
             className="form__input mt-3"
             type="search"
             placeholder="Producto, Categoría, Color..."
-            onChange={(e) => onChange(e.target.value)}
+            onInput={(e) => filterProds(e.target.value)}
           />
         </div>
       </div>
