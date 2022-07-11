@@ -14,12 +14,14 @@ const FilterProducts = ({ filterProds }) => {
         </button>
         <div className="dropdown-menu p-4">
           <h5 className="text-center mb-4">¿Qué estás buscando?</h5>
-          <input
-            className="form__input mt-3"
-            type="search"
-            placeholder="Producto, Categoría, Color..."
-            onInput={(e) => filterProds(e.target.value)}
-          />
+          <form onSubmit={(e) => filterProds(e)}>
+            <input
+              className="form__input mt-3"
+              name="search"
+              type="search"
+              placeholder="Producto, Categoría, Color..."
+            />
+          </form>
         </div>
       </div>
     </div>

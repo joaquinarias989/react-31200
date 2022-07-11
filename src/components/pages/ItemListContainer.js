@@ -69,9 +69,9 @@ const ItemListContainer = () => {
       .finally(() => setLoadButton(false));
   };
 
-  const filterProds = (value) => {
-    const oldProds = [...products];
-    let query = value.trim().toLowerCase();
+  const filterProds = (e) => {
+    e.preventDefault();
+    let query = e.target.elements.search.value.trim().toLowerCase();
     if (query.length > 0) {
       const filteredProds = products.filter((prod) =>
         prod.title.trim().toLowerCase().includes(query)

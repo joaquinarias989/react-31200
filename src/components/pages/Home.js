@@ -12,11 +12,7 @@ const Home = () => {
       </section>
 
       <section id="categories" className="categories container">
-        <div
-          className="flex-row"
-          data-aos="fade-right"
-          data-aos-duration="1000"
-        >
+        <div className="flex-row">
           <article className="flex-column">
             <img
               src={hanger}
@@ -63,11 +59,7 @@ const Home = () => {
             </a>
           </article>
         </div>
-        <div
-          className="flex-row mt-5"
-          data-aos="fade-up"
-          data-aos-duration="1000"
-        >
+        <div className="flex-row mt-5">
           <a
             href="./assets/pages/products.html"
             type="button"
@@ -82,11 +74,7 @@ const Home = () => {
 
       <section id="about" className="about container">
         <div className="row align-items-center justify-content-between">
-          <article
-            className="about__content col-md-8 col-lg-7 d-flex flex-column align-items-start"
-            data-aos="fade-right"
-            data-aos-duration="1000"
-          >
+          <article className="about__content col-md-8 col-lg-7 d-flex flex-column align-items-start">
             <h2 className="title-primary">¿Quiénes Somos?</h2>
             <div className="accordion__paper ms-md-5" id="accordionExample">
               <div>
@@ -173,11 +161,7 @@ const Home = () => {
               </div>
             </div>
           </article>
-          <div
-            className="about__icons col-md-3 col-lg-4 d-flex flex-md-column justify-content-center align-items-center flex-wrap"
-            data-aos="fade-left"
-            data-aos-duration="1000"
-          >
+          <div className="about__icons col-md-3 col-lg-4 d-flex flex-md-column justify-content-center align-items-center flex-wrap">
             <img
               src={logo}
               alt="Logo de la tienda StreetWear en color blanco y amarillo"

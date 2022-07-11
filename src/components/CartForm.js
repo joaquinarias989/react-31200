@@ -80,6 +80,7 @@ const CartForm = () => {
     }
 
     clearCart();
+    e.target.reset();
     setLoading(false);
     return MySwal.fire({
       title: <h2>Compra realizada exitosamente!</h2>,
@@ -153,7 +154,7 @@ const CartForm = () => {
             >
               <p className="text-end">
                 ¿Ya tenes cuenta?
-                <NavLink to="/Login" className="text-accent ms-2">
+                <NavLink to="/Ingresar" className="text-accent ms-2">
                   ¡Iniciá sesión!
                 </NavLink>
               </p>
