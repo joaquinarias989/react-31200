@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 const CartForm = () => {
   const [loading, setLoading] = useState(false);
-  const { cart, ship, totalPrice, clearCart, removeProd } =
+  const { cart, ship, totalPrice, clearCart, removeProdsOutStock } =
     useContext(CartContext);
   const MySwal = withReactContent(Swal);
   const handlePurchase = async (e) => {
@@ -24,7 +24,7 @@ const CartForm = () => {
 
     const prodsOutOfStock = await verifyStock(cart);
     if (prodsOutOfStock.length > 0) {
-      removeProd(undefined, prodsOutOfStock);
+      removeProdsOutStock(prodsOutOfStock);
       setLoading(false);
       return MySwal.fire({
         title: <h2>No pudimos avanzar con tu compra</h2>,

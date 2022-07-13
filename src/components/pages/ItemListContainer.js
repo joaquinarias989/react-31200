@@ -19,7 +19,7 @@ const ItemListContainer = () => {
         setProducts(
           data.docs.map((item) => ({
             id: item.id,
-            quantity: 0,
+            quantity: [0],
             ...item.data(),
           }))
         );

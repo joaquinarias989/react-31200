@@ -23,21 +23,6 @@ const ItemDetail = ({ item }) => {
         timerProgressBar: true,
       });
     }
-    // if (item.stock[sizeSelected] < quantity) {
-    //   return Swal.fire({
-    //     icon: "error",
-    //     title:
-    //       item.stock[sizeSelected] > 1
-    //         ? `Sólo nos quedan ${item.stock[sizeSelected]} unidad/es en talle ${item.size[sizeSelected]}`
-    //         : `Sólo nos queda 1 unidad en talle ${item.size[sizeSelected]}`,
-    //     toast: true,
-    //     position: "top-end",
-    //     showConfirmButton: false,
-    //     showCloseButton: true,
-    //     timer: 3000,
-    //     timerProgressBar: true,
-    //   });
-    // }
     addToCart(item, quantity, sizeSelected);
     setContinueBuy(!continueBuy);
   };
@@ -173,7 +158,7 @@ const ItemDetail = ({ item }) => {
           ) : (
             <ItemCount
               page={"detail"}
-              stock={sizeSelected > -1 ? item.stock[sizeSelected] : 0}
+              stock={sizeSelected > -1 ? item.stock[sizeSelected] : 1}
               onAdd={onAdd}
             />
           )}

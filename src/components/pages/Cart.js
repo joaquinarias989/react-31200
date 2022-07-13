@@ -21,7 +21,6 @@ const Cart = () => {
           </ol>
         </div>
       </div>
-
       <div className="row justify-content-between w-100">
         {cart.length < 1 ? (
           <div className="center-50">

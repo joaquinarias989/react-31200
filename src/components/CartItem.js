@@ -8,7 +8,7 @@ const CartItem = ({ sizes, item, index }) => {
     <div className="cart__product" key={item.id}>
       <div className="cart__product__img">
         <img src={item.img} alt="Imagen del producto" />
-        <button onClick={() => removeProd(item)}>
+        <button onClick={() => removeProd(item, undefined)}>
           <i className="fa fa-trash"></i>
         </button>
       </div>
@@ -56,7 +56,7 @@ const CartItem = ({ sizes, item, index }) => {
                       className={
                         item.quantity[indexSize] === 1 ? "btn-remove" : "d-none"
                       }
-                      onClick={() => removeProd(item, undefined, indexSize)}
+                      onClick={() => removeProd(item, indexSize)}
                     >
                       <i className="fa fa-trash"></i>
                     </button>
@@ -96,7 +96,7 @@ const CartItem = ({ sizes, item, index }) => {
     <div className="cart__product" key={item.id}>
       <div className="cart__product__img">
         <img src={item.img} alt="Imagen del producto" />
-        <button onClick={() => removeProd(item, undefined, index)}>
+        <button onClick={() => removeProd(item, index)}>
           <i className="fa fa-trash"></i>
         </button>
       </div>
@@ -133,7 +133,7 @@ const CartItem = ({ sizes, item, index }) => {
             <button
               id="removeProd"
               className={item.quantity[index] === 1 ? "btn-remove" : "d-none"}
-              onClick={() => removeProd(item, undefined, index)}
+              onClick={() => removeProd(item, index)}
             >
               <i className="fa fa-trash"></i>
             </button>

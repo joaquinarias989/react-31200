@@ -25,35 +25,44 @@ export const CartContextProvider = ({ children }) => {
   });
 
   const ship = 475;
-  let subtotalPrice = cart.reduce(
-    (acc, { quantity, price }) => acc + quantity * price,
-    0
-  );
-  let totalPrice = subtotalPrice + ship;
-  let totalQuantity = cart.reduce((acc, { quantity }) => acc + quantity, 0);
 
-  const addToCart = (item, quantity, sizeSelected) => {
-    if (quantity > item.stock[sizeSelected])
+  //calculate total quantity of products in cart
+  let totalQuantity = cart
+    .map((item) => item.quantity.reduce((acc, cur) => acc + cur, 0))
+    .reduce((acc, cur) => acc + cur, 0);
+
+  //calculate subtotal price of products in cart
+  let subtotalPrice = cart
+    .map(
+      (item) => item.price * item.quantity.reduce((acc, cur) => acc + cur, 0)
+    )
+    .reduce((acc, cur) => acc + cur, 0);
+
+  //calculate total price
+  let totalPrice = subtotalPrice + ship;
+
+  const addToCart = (item, quantity, index) => {
+    if (quantity > item.stock[index])
       return Toast.fire({
         icon: "error",
         title:
-          item.stock[sizeSelected] > 1
-            ? `Sólo nos quedan ${item.stock[sizeSelected]} unidad/es en talle ${item.size[sizeSelected]}`
-            : `Sólo nos queda 1 unidad en talle ${item.size[sizeSelected]}`,
+          item.stock[index] > 1
+            ? `Sólo nos quedan ${item.stock[index]} unidad/es en talle ${item.size[index]}`
+            : `Sólo nos queda 1 unidad en talle ${item.size[index]}`,
         timer: 3000,
       });
 
     //if prod exist in cart
     const prod = cart.find((p) => p.id === item.id);
     if (prod) {
-      if (prod.quantity[sizeSelected] + quantity > item.stock[sizeSelected]) {
+      if (prod.quantity[index] + quantity > item.stock[index]) {
         return Toast.fire({
           icon: "error",
-          title: "No tenemos más stock del producto",
+          title: `No tenemos más stock del producto en talle ${item.size[index]}`,
         });
       }
-      prod.quantity[sizeSelected] += quantity;
-      item.quantity[sizeSelected] = prod.quantity[sizeSelected];
+      prod.quantity[index] += quantity;
+      item.quantity[index] = prod.quantity[index];
       setCart([...cart]);
     } else {
       //if prod not exist in cart
@@ -61,11 +70,10 @@ export const CartContextProvider = ({ children }) => {
       for (let i = 0; i < item.size.length; i++) {
         item.quantity[i] = 0;
       }
-      item.quantity[sizeSelected] = quantity;
+      item.quantity[index] = quantity;
       setCart([...cart, item]);
     }
 
-    console.log(prod);
     return Toast.fire({
       icon: "success",
       title: `${item.title} (${quantity}) agregado exitosamente!`,
@@ -100,21 +108,22 @@ export const CartContextProvider = ({ children }) => {
     setCart([...cart]);
   };
 
-  const removeProd = (item, itemsOutStock, index) => {
-    if (item) {
-      if (index !== -1) {
-        item.quantity[index] = 0;
-        return setCart([...cart]);
-      }
-      console.log("hola");
+  const removeProd = (item, index) => {
+    if (item.quantity.reduce((acc, cur) => acc + cur, -1) === 0)
       return setCart(cart.filter((p) => p.id !== item.id));
+    if (index !== -1 && index !== undefined) {
+      item.quantity[index] = 0;
+      return setCart([...cart]);
     }
+    return setCart(cart.filter((p) => p.id !== item.id));
+  };
 
-    for (const itemOutStock of itemsOutStock) {
-      const prodDelete = cart.find((p) => p.id === itemOutStock.id);
+  const removeProdsOutStock = (itemsOutStock) => {
+    for (const item of itemsOutStock) {
+      const prodDelete = cart.find((p) => p.id === item.id);
       for (let c = 0; c < cart.length; c++) {
         cart[c] === prodDelete && cart.splice(c, 1);
-        itemOutStock.quantity && (itemOutStock.quantity = 0);
+        item.quantity && (item.quantity = 0);
       }
     }
     setCart([...cart]);
@@ -148,6 +157,7 @@ export const CartContextProvider = ({ children }) => {
         addOne,
         reduceOne,
         removeProd,
+        removeProdsOutStock,
         clearCart,
         updateProdQuantity,
         cart,

@@ -34,7 +34,10 @@ const CartResume = ({ type }) => {
           });
         })} */}
         {cart.map((item) => {
-          return <CartItem sizes={true} key={item.id} item={item} />;
+          return item.quantity.reduce((acc, quantity) => acc + quantity, 0) ===
+            0 ? null : (
+            <CartItem sizes={true} key={item.id} item={item} />
+          );
         })}
       </div>
       <button className="btn-remove fw-light" onClick={() => clearCart()}>
