@@ -32,67 +32,80 @@ export const CartContextProvider = ({ children }) => {
   let totalPrice = subtotalPrice + ship;
   let totalQuantity = cart.reduce((acc, { quantity }) => acc + quantity, 0);
 
-  const addToCart = (item, quantity) => {
-    if (quantity > item.stock) {
+  const addToCart = (item, quantity, sizeSelected) => {
+    if (quantity > item.stock[sizeSelected])
       return Toast.fire({
         icon: "error",
-        title: "No tenemos más stock del producto",
+        title:
+          item.stock[sizeSelected] > 1
+            ? `Sólo nos quedan ${item.stock[sizeSelected]} unidad/es en talle ${item.size[sizeSelected]}`
+            : `Sólo nos queda 1 unidad en talle ${item.size[sizeSelected]}`,
+        timer: 3000,
       });
-    }
+
+    //if prod exist in cart
     const prod = cart.find((p) => p.id === item.id);
     if (prod) {
-      if (prod.quantity + quantity > item.stock) {
+      if (prod.quantity[sizeSelected] + quantity > item.stock[sizeSelected]) {
         return Toast.fire({
           icon: "error",
           title: "No tenemos más stock del producto",
         });
       }
-      prod.quantity += quantity;
-      item.quantity = prod.quantity;
-      // prod.stock -= quantity;
+      prod.quantity[sizeSelected] += quantity;
+      item.quantity[sizeSelected] = prod.quantity[sizeSelected];
       setCart([...cart]);
     } else {
-      item.quantity = quantity;
+      //if prod not exist in cart
+      //fill item.quantity array whit 0s when item is added to cart for first time
+      for (let i = 0; i < item.size.length; i++) {
+        item.quantity[i] = 0;
+      }
+      item.quantity[sizeSelected] = quantity;
       setCart([...cart, item]);
     }
 
+    console.log(prod);
     return Toast.fire({
       icon: "success",
       title: `${item.title} (${quantity}) agregado exitosamente!`,
     });
   };
 
-  const addOne = (item) => {
+  const addOne = (item, index) => {
     if (!cart.some((p) => p.id === item.id))
       return Toast.fire({
         icon: "error",
         title: `El producto no se encuentra en el carrito`,
       });
-    if (item.quantity >= item.stock)
+    if (item.quantity[index] >= item.stock[index])
       return Toast.fire({
         icon: "error",
-        title: `No tenemos más stock del producto`,
+        title: `No tenemos más stock del producto en talle ${item.size[index]}`,
       });
 
-    item.quantity++;
+    item.quantity[index]++;
     setCart([...cart]);
   };
 
-  const reduceOne = (item) => {
+  const reduceOne = (item, index) => {
     if (!cart.includes(item))
       return Toast.fire({
         icon: "error",
         title: `El producto no se encuentra en el carrito`,
       });
-    if (item.quantity === 0) return removeProd(item);
+    if (item.quantity[index] === 0) return (item.quantity[index] = 0);
 
-    item.quantity--;
+    item.quantity[index]--;
     setCart([...cart]);
   };
 
-  const removeProd = (item, itemsOutStock) => {
+  const removeProd = (item, itemsOutStock, index) => {
     if (item) {
-      item.quantity && (item.quantity = 0);
+      if (index) {
+        item.quantity[index] = 0;
+        return setCart([...cart]);
+      }
       return setCart(cart.filter((p) => p.id !== item.id));
     }
 

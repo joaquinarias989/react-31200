@@ -3,14 +3,43 @@ import sizes from ".././img/medidas.svg";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/cartContext";
+import Swal from "sweetalert2";
 
 const ItemDetail = ({ item }) => {
   const [continueBuy, setContinueBuy] = useState(true);
+  const [sizeSelected, setSizeSelected] = useState(Array.prototype.indexOf());
   const { addToCart } = useContext(CartContext);
 
   const onAdd = (quantity) => {
+    if (sizeSelected === -1) {
+      return Swal.fire({
+        icon: "error",
+        title: "No seleccionaste el talle che!",
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        showCloseButton: true,
+        timer: 3000,
+        timerProgressBar: true,
+      });
+    }
+    // if (item.stock[sizeSelected] < quantity) {
+    //   return Swal.fire({
+    //     icon: "error",
+    //     title:
+    //       item.stock[sizeSelected] > 1
+    //         ? `Sólo nos quedan ${item.stock[sizeSelected]} unidad/es en talle ${item.size[sizeSelected]}`
+    //         : `Sólo nos queda 1 unidad en talle ${item.size[sizeSelected]}`,
+    //     toast: true,
+    //     position: "top-end",
+    //     showConfirmButton: false,
+    //     showCloseButton: true,
+    //     timer: 3000,
+    //     timerProgressBar: true,
+    //   });
+    // }
+    addToCart(item, quantity, sizeSelected);
     setContinueBuy(!continueBuy);
-    addToCart(item, quantity);
   };
 
   const askContinue = () => {
@@ -95,7 +124,7 @@ const ItemDetail = ({ item }) => {
         </div>
 
         <div className="product__details col-md-6 flex-column">
-          <p className="product__description">{item.description}.</p>
+          <p className="product__description">{item.description}</p>
           <div className="product__preferences d-flex justify-content-between align-items-center mt-3 flex-wrap flex-md-nowrap">
             <select name="color" className="w-100" defaultValue={"Color"}>
               <option value={"Color"} disabled>
@@ -107,11 +136,18 @@ const ItemDetail = ({ item }) => {
               name="talle"
               className="w-100 ms-md-3 mt-3 mt-md-0"
               defaultValue={"Talle"}
+              onChange={(e) =>
+                setSizeSelected(item.size.indexOf(e.target.value))
+              }
             >
               <option value={"Talle"} disabled>
                 Talle
               </option>
-              <option value={item.size}>{item.size}</option>
+              {item.size.map((size) => (
+                <option key={size} value={size}>
+                  {size}
+                </option>
+              ))}
             </select>
           </div>
           <div className="product__sizes my-4">
@@ -125,17 +161,21 @@ const ItemDetail = ({ item }) => {
             <div className="d-flex">
               <button
                 className="btn-secondary w-25"
-                aria-label="Cargar mas productos"
+                aria-label="Continuar comprando"
                 onClick={askContinue}
               >
-                <i className="fa fa-paintbrush"></i> Modificar
+                <i className="fa fa-paintbrush"></i> Seguir comprando
               </button>
               <Link to="/Carrito" className="btn-principal w-75">
                 <i className="fa fa-cart-plus"></i> Terminar Compra
               </Link>
             </div>
           ) : (
-            <ItemCount page={"detail"} stock={item.stock} onAdd={onAdd} />
+            <ItemCount
+              page={"detail"}
+              stock={sizeSelected > -1 ? item.stock[sizeSelected] : 0}
+              onAdd={onAdd}
+            />
           )}
         </div>
       </div>

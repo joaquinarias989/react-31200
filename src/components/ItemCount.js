@@ -24,7 +24,7 @@ function ItemCount({ page, stock, initial = 1, onAdd }) {
           className="btn-quantity"
           aria-label="Añadir un producto"
           onClick={increase}
-          disabled={quantity >= stock}
+          // disabled={quantity >= stock}
         >
           +
         </button>

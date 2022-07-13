@@ -61,7 +61,7 @@ const Login = () => {
         Swal.fire({
           text: "Hemos enviado un correo a tu cuenta que te permitirá restablecer tu contraseña, por favor, verifica tu bandeja de entrada o SPAM.",
           confirmButtonText: "OK",
-          icon: "succes",
+          icon: "success",
         });
       })
       .catch((error) => {
@@ -142,7 +142,7 @@ const Login = () => {
               </fieldset>
 
               <p>
-                ¿No tenes cuenta?
+                ¿No tenes cuenta?{" "}
                 <Link to={"/Registrarse"} className="text-accent">
                   ¡Creála!
                 </Link>

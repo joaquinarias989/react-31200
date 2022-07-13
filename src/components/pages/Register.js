@@ -1,9 +1,12 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
   //register whit firebase
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -14,13 +17,26 @@ const Register = () => {
     const auth = getAuth();
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential.user);
+        Swal.fire({
+          title: "Bienvenido",
+          text: "Te has registrado correctamente, pasá y disfrutá la estadía ;)",
+          confirmButtonText: "Aceptar",
+          icon: "success",
+        });
+        navigate("/Cuenta");
       })
       .catch((error) => {
-        console.log(error);
+        Swal.fire({
+          title: "Ocurrió un error",
+          text: "Por favor, intentalo nuevamente",
+          confirmButtonText: "Aceptar",
+          icon: "error",
+        });
+      })
+      .finally(() => {
+        e.target.reset();
+        setLoading(false);
       });
-    e.target.reset();
-    setLoading(false);
   };
   return (
     <section id="register" className="register container">
@@ -120,7 +136,7 @@ const Register = () => {
                 <i className="fa fa-user-plus"></i> Crear cuenta
               </button>
               <p className="text-end pt-1">
-                ¿Ya tenes cuenta?
+                ¿Ya tenes cuenta?{" "}
                 <Link to={"/Ingresar"} className="text-accent">
                   ¡Iniciá sesión!
                 </Link>
