@@ -54,8 +54,18 @@ export const verifyStock = async (items) => {
   const prodsOutOfStock = [];
   for (const item of items) {
     const prod = await getDoc(doc(prodsRef, item.id));
-    if (prod.data().stock < item.quantity)
-      prodsOutOfStock.push({ id: prod.id, ...prod.data() });
+    //verify if the product has enough stock for each size
+    prod.data().size.forEach((size) => {
+      const index = item.size.indexOf(size);
+      if (item.quantity[index] > prod.data().stock[index]) {
+        prodsOutOfStock.push({
+          id: item.id,
+          index: index,
+        });
+      }
+    });
+    // if (prod.data().stock < item.quantity)
+    //   prodsOutOfStock.push({ id: prod.id, ...prod.data() });
   }
   return prodsOutOfStock.length === 0 ? true : prodsOutOfStock;
 };
