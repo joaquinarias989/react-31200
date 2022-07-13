@@ -102,10 +102,11 @@ export const CartContextProvider = ({ children }) => {
 
   const removeProd = (item, itemsOutStock, index) => {
     if (item) {
-      if (index) {
+      if (index !== -1) {
         item.quantity[index] = 0;
         return setCart([...cart]);
       }
+      console.log("hola");
       return setCart(cart.filter((p) => p.id !== item.id));
     }
 

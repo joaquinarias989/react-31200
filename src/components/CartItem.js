@@ -14,56 +14,58 @@ const CartItem = ({ sizes, item, index }) => {
       </div>
 
       <div className="cart__product__info">
-        <h3 className="cart__product__title text-underlined">
-          <Link to={`/Productos/${item.id}`}>{item.title}</Link>
-        </h3>
-        <p className="cart__product__details">
-          Color: <strong>{item.color}</strong>
-        </p>
-        {item.size.map((size) => {
-          const indexSize = item.size.indexOf(size);
-          return item.quantity[indexSize] === 0 ? null : (
-            <div
-              className="d-flex algn-items-center jc-between gap-1"
-              key={size}
-            >
-              <p>
-                Talle <strong>{size}</strong>, Cantidad{" "}
-                <span className="cart__product__quantity px-2">
-                  <strong>{item.quantity[indexSize]}</strong>
-                </span>
-              </p>
-              <div className="d-flex algn-items-center btn-group">
-                <button
-                  id="addOne"
-                  className="btn-principal"
-                  onClick={() => addOne(item, indexSize)}
+        <div>
+          <h3 className="cart__product__title text-underlined mb-3">
+            <Link to={`/Productos/${item.id}`}>{item.title}</Link>
+          </h3>
+          <div className="flex-column gap-2">
+            {item.size.map((size) => {
+              const indexSize = item.size.indexOf(size);
+              return item.quantity[indexSize] === 0 ? null : (
+                <div
+                  className="d-flex algn-items-center jc-between gap-1"
+                  key={size}
                 >
-                  <i className="fa fa-plus"></i>
-                </button>
-                <button
-                  id="reduceOne"
-                  className={
-                    item.quantity[indexSize] > 1 ? "btn-secundario" : "d-none"
-                  }
-                  onClick={() => reduceOne(item, indexSize)}
-                >
-                  <i className="fa fa-minus"></i>
-                </button>
-                <button
-                  id="removeProd"
-                  className={
-                    item.quantity[indexSize] === 1 ? "btn-remove" : "d-none"
-                  }
-                  onClick={() => removeProd(item, undefined, indexSize)}
-                >
-                  <i className="fa fa-trash"></i>
-                </button>
-              </div>
-            </div>
-          );
-        })}
-
+                  <p>
+                    Talle <strong>{size}</strong>, Cantidad{" "}
+                    <span className="cart__product__quantity px-2">
+                      <strong>{item.quantity[indexSize]}</strong>
+                    </span>
+                  </p>
+                  <div className="d-flex algn-items-center btn-group">
+                    <button
+                      id="addOne"
+                      className="btn-principal"
+                      onClick={() => addOne(item, indexSize)}
+                    >
+                      <i className="fa fa-plus"></i>
+                    </button>
+                    <button
+                      id="reduceOne"
+                      className={
+                        item.quantity[indexSize] > 1
+                          ? "btn-secundario"
+                          : "d-none"
+                      }
+                      onClick={() => reduceOne(item, indexSize)}
+                    >
+                      <i className="fa fa-minus"></i>
+                    </button>
+                    <button
+                      id="removeProd"
+                      className={
+                        item.quantity[indexSize] === 1 ? "btn-remove" : "d-none"
+                      }
+                      onClick={() => removeProd(item, undefined, indexSize)}
+                    >
+                      <i className="fa fa-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
         {/* <div className="d-flex algn-items-center btn-group">
             <button
               id="addOne"
