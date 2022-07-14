@@ -121,19 +121,12 @@ export const CartContextProvider = ({ children }) => {
   const removeProdsOutStock = (itemsOutStock) => {
     cart.forEach((item) => {
       itemsOutStock.forEach((itemOutStock) => {
-        if (item.id === itemOutStock.id) {
-          item.quantity[itemOutStock.index] = 0;
-        }
+        if (item.id === itemOutStock.id) item.quantity[itemOutStock.index] = 0;
       });
+      if (item.quantity.reduce((acc, cur) => acc + cur, 0) === 0) {
+        cart.splice(cart.indexOf(item), 1);
+      }
     });
-    // for (const item of itemsOutStock) {
-    //   const prodDelete = cart.find((p) => p.id === item.id);
-    //   // for (let c = 0; c < cart.length; c++) {
-    //   //   cart[c] === prodDelete && cart.splice(c, 1);
-    //   //   item.quantity && (item.quantity = 0);
-    //   // }
-    //   item.quantity[index] = 0;
-    // }
     setCart([...cart]);
   };
 

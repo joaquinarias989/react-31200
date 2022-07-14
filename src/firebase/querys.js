@@ -60,12 +60,12 @@ export const verifyStock = async (items) => {
       if (item.quantity[index] > prod.data().stock[index]) {
         prodsOutOfStock.push({
           id: item.id,
+          title: item.title,
+          size: size,
           index: index,
         });
       }
     });
-    // if (prod.data().stock < item.quantity)
-    //   prodsOutOfStock.push({ id: prod.id, ...prod.data() });
   }
   return prodsOutOfStock.length === 0 ? true : prodsOutOfStock;
 };
@@ -77,9 +77,9 @@ export const createOrder = async (order, cart) => {
     const orderCollection = collection(firestoreDB, "orders");
     const orderRef = doc(orderCollection);
     const resOrder = batch.set(orderRef, order);
-    resp = resOrder._mutations[0].key.path.segments[1];
+    resp = resOrder._mutations[0].key.path.segments[1]; //idOrder
     //No hago addDoc porque eso agrega la orden directamente, y yo lo que quiero es "guardarla" en la transaccion hasta hacer el commit.
-    //Ya que en caso de error en la parte de actualizar stock, la "transaccion" tiraría error y no se crearía ni la orden ni se actualizaría stock.
+    //Ya que en caso de error en la parte de actualizar stock, la transaccion devolvería error y no se crearía ni la orden ni se actualizaría stock.
 
     await updateStock(cart, batch);
     await batch.commit();
@@ -99,49 +99,18 @@ const updateStock = async (cart, batch) => {
     )
   );
   await getDocs(queryUpdateStock).then((resp) => {
-    resp.docs.forEach((doc) =>
+    resp.docs.forEach((doc) => {
+      const newStock = [];
+      const prodToUpdate = cart.find((item) => item.id === doc.id);
+      const oldStock = doc.data().stock;
+      oldStock.forEach((s) => {
+        const index = oldStock.indexOf(s);
+        newStock.push(oldStock[index] - prodToUpdate.quantity[index]);
+      });
+
       batch.update(doc.ref, {
-        stock:
-          doc.data().stock - cart.find((item) => item.id === doc.id).quantity,
-      })
-    );
+        stock: newStock,
+      });
+    });
   });
 };
-
-// getMoreProds(lastDoc, category)
-//       .then((data) => {
-//         console.log(data);
-//         if (data != null) {
-//           setProducts([...products, data]);
-//           setLastDoc(data[data.length - 1]);
-//         } else {
-//           Toast.fire({
-//             icon: "warning",
-//             title: `No quedan ${category ? category : "productos"} por cargar`,
-//           });
-//         }
-//       })
-//       .catch((err) => {
-//         setLoadButton(false);
-//         console.log(err);
-//       })
-//       .finally(() => setLoadButton(false));
-
-// export const getProdsPrueba = async (id, category) => {
-//   return id
-//     ? await getDoc(doc(prodsRef, id))
-//     : category
-//     ? await getDocs(
-//         query(prodsRef, where("category", "==", category), limitCondition)
-//       ).then((data) => {
-//         return [
-//           data.docs[data.docs.length - 1],
-//           data.docs.map((item) => ({ id: item.id, ...item.data() })),
-//         ];
-//       })
-//     : await getDocs(query(prodsRef, limitCondition)).then((data) => {
-//         return data.docs.map((item) => ({ id: item.id, ...item.data() }));
-//       });
-// };
-
-// getProdsPrueba(undefined, "Remeras").then((data) => console.log(data[0]));

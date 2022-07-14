@@ -16,7 +16,7 @@ const CartForm = () => {
     if (!validEmail) {
       return MySwal.fire({
         title: <h2>Email incorrecto</h2>,
-        text: "Por favor, ingrese un email válido",
+        text: "Por favor, revisá el email",
         icon: "error",
       });
     }
@@ -32,8 +32,9 @@ const CartForm = () => {
           <>
             <p>No tenemos suficiente stock de los siguientes productos:</p>
             {prodsOutOfStock.map((p) => (
-              <i key={p.id} className="fw-bold">
-                {p.title}
+              <i key={p.id} className="d-block">
+                <span className="fw-bold">{p.title}</span>, Talle:{" "}
+                <span className="fw-bold">{p.size}</span>
               </i>
             ))}
             <p>
