@@ -116,5 +116,6 @@ Check the [Live Preview](https://street-wear-react.netlify.app/) (hosted by [Net
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 
 - To [Federico Osandon](https://github.com/federico-osandon) for the teaching and help provided during the course.
-- To [Nicolaz Dias]() for the excellent mentoring, helping and providing support whenever requested.
+- To [Nicolas Diaz]() for the excellent mentoring, helping and providing support whenever requested.
 - To the mates of the course.
+- To my friend, [Diego Percaz](https://www.instagram.com/diegopercaz1/), owner of STREET WEAR, for allowing me to use the brand for educational porposes.
