@@ -70,13 +70,28 @@ const ItemDetail = ({ item }) => {
           >
             <div className="carousel-inner">
               <div className="carousel-item active">
-                <img src={item.img} className="d-block w-100" alt="" />
+                <img
+                  src={item.img}
+                  className="d-block w-100"
+                  alt=""
+                  loading="lazy"
+                />
               </div>
               <div className="carousel-item">
-                <img src={item.img} className="d-block w-100" alt="" />
+                <img
+                  src={item.img}
+                  className="d-block w-100"
+                  alt=""
+                  loading="lazy"
+                />
               </div>
               <div className="carousel-item">
-                <img src={item.img} className="d-block w-100" alt="" />
+                <img
+                  src={item.img}
+                  className="d-block w-100"
+                  alt=""
+                  loading="lazy"
+                />
               </div>
             </div>
             <button
@@ -140,6 +155,7 @@ const ItemDetail = ({ item }) => {
               src={sizes}
               alt="Tabla de medidas de cada talle del producto"
               className="img-fluid"
+              loading="lazy"
             />
           </div>
           {!continueBuy ? (

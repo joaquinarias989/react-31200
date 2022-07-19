@@ -1,4 +1,51 @@
+import { Timestamp } from "firebase/firestore";
+import { useState } from "react";
+import Swal from "sweetalert2";
+import { sendContact } from "../firebase/querys";
+
 const Contact = () => {
+  const [loading, setLoading] = useState(false);
+
+  const verifyEmail = (email) => {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const validEmail = verifyEmail(e.target.elements.email.value);
+    if (!validEmail) {
+      return Swal.fire({
+        title: <h2>Email incorrecto</h2>,
+        text: "Por favor, revisá el email ingresado",
+        icon: "error",
+      });
+    }
+    setLoading(true);
+
+    const contact = {
+      name: e.target.elements.name.value,
+      email: e.target.elements.email.value,
+      message: e.target.elements.message.value,
+      date: Timestamp.fromDate(new Date()),
+    };
+
+    const resp = await sendContact(contact);
+    if (resp === "No pudimos procesar su mensaje, intente nuevamente") {
+      setLoading(false);
+      return Swal.fire({
+        title: <h2>Algo salió mal</h2>,
+        text: resp,
+        icon: "error",
+      });
+    }
+    setLoading(false);
+    return Swal.fire({
+      title: "Mensaje enviado!",
+      text: `Gracias por contactarnos, nos comunicaremos a la brevedad. Ante cualquier demora, tu código de consulta es: ${resp}`,
+      icon: "success",
+    });
+  };
   return (
     <section id="contact" className="contact container">
       <div className="row justify-content-between justify-content-center align-items-center">
@@ -6,52 +53,55 @@ const Contact = () => {
           <h2 className="title-primary vertical">Contactános</h2>
           <form
             id="formContact"
-            action="https://formsubmit.co/aef81cd42c97cf0e3e57027a645cff68"
-            method="POST"
             className="form__paper"
+            onSubmit={handleSubmit}
           >
-            <div className="input__box">
-              <label htmlFor="name" className="form__label">
-                Nombre y Apellido
-              </label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                className="form__input"
-                required
-              />
-            </div>
-            <div className="input__box">
-              <label htmlFor="email" className="form__label">
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                className="form__input"
-                required
-              />
-            </div>
-            <div className="input__box">
-              <label className="form__label">Mensaje</label>
-              <textarea
-                name="message"
-                id="message"
-                className="form__input"
-                rows="6"
-                column="10"
-                required
-              ></textarea>
-            </div>
-            <button type="submit" className="btn-principal">
-              <i className="fa fa-paper-plane"></i> Enviar
-            </button>
-
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_template" value="box" />
-            <input type="hidden" name="_subject" id="subject" />
+            <fieldset disabled={loading && true}>
+              <div className="input__box">
+                <label htmlFor="name" className="form__label">
+                  Nombre y Apellido
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  className="form__input"
+                  required
+                />
+              </div>
+              <div className="input__box">
+                <label htmlFor="email" className="form__label">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  className="form__input"
+                  required
+                />
+              </div>
+              <div className="input__box">
+                <label className="form__label">Mensaje</label>
+                <textarea
+                  name="message"
+                  id="message"
+                  className="form__input"
+                  rows="6"
+                  column="10"
+                  required
+                ></textarea>
+              </div>
+              {loading ? (
+                <button className="btn-principal" disabled>
+                  <i className="fa fa-paper-plane"></i> Enviando...
+                </button>
+              ) : (
+                <button type="submit" className="btn-principal">
+                  <i className="fa fa-paper-plane"></i> Enviar
+                </button>
+              )}
+            </fieldset>
           </form>
         </article>
 

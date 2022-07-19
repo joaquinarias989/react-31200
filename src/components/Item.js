@@ -14,7 +14,7 @@ const Item = memo(({ item }) => {
     <article className="product__card">
       <Link to={`/Productos/${item.id}`}>
         <div className="product__card__img">
-          <img src={item.img} alt="Imagen del producto" />
+          <img src={item.img} alt="Imagen del producto" loading="lazy" />
         </div>
         <div className="product__card__info">
           <h4 className="product__card__title">{item.title}</h4>

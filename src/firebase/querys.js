@@ -1,5 +1,6 @@
 import firestoreDB from "././config";
 import {
+  addDoc,
   collection,
   doc,
   documentId,
@@ -115,4 +116,16 @@ const updateStock = async (cart, batch) => {
       });
     });
   });
+};
+
+////// CONTACT /////
+export const sendContact = async (contact) => {
+  let resp = "";
+  const contactCollection = collection(firestoreDB, "contacts");
+  await addDoc(contactCollection, contact)
+    .then((doc) => (resp = doc.id), console.log(doc.id))
+    .catch(
+      (error) => (resp = "No pudimos procesar su consulta, intente nuevamente")
+    );
+  return resp;
 };

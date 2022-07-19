@@ -45,10 +45,7 @@ const Login = () => {
   const handleLogout = async (e) => {
     e.preventDefault();
     const auth = getAuth();
-    await signOut(auth)
-      .then(() => console.log("vuelva pronto"))
-      .catch((error) => console.log(error));
-    setUserLogued(false);
+    await signOut(auth).then(() => setUserLogued(false));
   };
   //recover password with firebase
   const handleRecover = async (e) => {
@@ -56,7 +53,7 @@ const Login = () => {
     setLoading(true);
     const email = e.target.elements.email.value;
     const auth = getAuth();
-    sendPasswordResetEmail(auth, email)
+    await sendPasswordResetEmail(auth, email)
       .then(() => {
         Swal.fire({
           text: "Hemos enviado un correo a tu cuenta que te permitirá restablecer tu contraseña, por favor, verifica tu bandeja de entrada o SPAM.",
