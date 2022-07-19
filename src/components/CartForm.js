@@ -193,6 +193,9 @@ const CartForm = () => {
                   <option value="cba">Córdoba</option>
                   <option value="bsas">Buenos Aires</option>
                   <option value="stafe">Santa Fe</option>
+                  <option value="stafe">Salta</option>
+                  <option value="stafe">Mendoza</option>
+                  <option value="stafe">Rio Negro</option>
                 </select>
               </div>
               <input

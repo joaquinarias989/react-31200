@@ -15,15 +15,15 @@ const Footer = () => {
             className="nav-icons"
             aria-label="Navegar a la página de Inicio"
           >
-            <i className="fas fa-home"></i>
+            <i className="fas fa-home" />
           </NavLink>
 
           <div className="footer__payment flex-column">
             <strong>Todos los métodos de pago</strong>
             <div className="icons flex-row">
-              <i className="fa fa-credit-card"></i>
-              <i className="fab fa-bitcoin"></i>
-              <i className="fa fa-money-bill-alt"></i>
+              <i className="fa fa-credit-card" />
+              <i className="fab fa-bitcoin" />
+              <i className="fa fa-money-bill-alt" />
             </div>
           </div>
           <div className="footer__logo flex-column">
@@ -37,7 +37,7 @@ const Footer = () => {
             aria-label="Ir al comienzo de la página"
             className="nav-icons"
           >
-            <i className="fas fa-arrow-up"></i>
+            <i className="fas fa-arrow-up" />
           </button>
         </div>
 

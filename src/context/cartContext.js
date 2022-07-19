@@ -102,18 +102,17 @@ export const CartContextProvider = ({ children }) => {
         icon: "error",
         title: `El producto no se encuentra en el carrito`,
       });
-    if (item.quantity[index] === 0) return (item.quantity[index] = 0);
+    if (item.quantity[index] === 1) return removeProd(item, index);
 
     item.quantity[index]--;
     setCart([...cart]);
   };
 
   const removeProd = (item, index) => {
-    if (item.quantity.reduce((acc, cur) => acc + cur, -1) === 0)
-      return setCart(cart.filter((p) => p.id !== item.id));
     if (index !== -1 && index !== undefined) {
       item.quantity[index] = 0;
-      return setCart([...cart]);
+      if (item.quantity.reduce((acc, cur) => acc + cur, 0) > 0)
+        return setCart([...cart]);
     }
     return setCart(cart.filter((p) => p.id !== item.id));
   };
@@ -123,9 +122,8 @@ export const CartContextProvider = ({ children }) => {
       itemsOutStock.forEach((itemOutStock) => {
         if (item.id === itemOutStock.id) item.quantity[itemOutStock.index] = 0;
       });
-      if (item.quantity.reduce((acc, cur) => acc + cur, 0) === 0) {
+      if (item.quantity.reduce((acc, cur) => acc + cur, 0) === 0)
         cart.splice(cart.indexOf(item), 1);
-      }
     });
     setCart([...cart]);
   };
@@ -137,7 +135,7 @@ export const CartContextProvider = ({ children }) => {
         title: `El carrito no posee ningún producto`,
       });
 
-    cart.forEach((prod) => (prod.quantity = 0));
+    cart.forEach((prod) => delete prod.quantity);
     setCart([]);
   };
 

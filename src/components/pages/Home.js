@@ -9,6 +9,9 @@ const Home = () => {
         <Link type="button" className="btn-principal" to={"/Productos"}>
           <i className="fas fa-shopping-bag me-2"></i> Comprar ahora
         </Link>
+        <button type="button" className="btn-principal">
+          Add Prod
+        </button>
       </section>
 
       <section id="categories" className="categories container">
@@ -20,13 +23,13 @@ const Home = () => {
               width="100%"
               height="100%"
             />
-            <a
+            <Link
               className="btn-secundario"
               type="button"
-              href="./assets/pages/products.html"
+              to={"/Productos/Categorias/Abrigos"}
             >
               Abrigos
-            </a>
+            </Link>
           </article>
           <article className="flex-column">
             <img
@@ -35,13 +38,13 @@ const Home = () => {
               width="100%"
               height="100%"
             />
-            <a
+            <Link
               className="btn-secundario"
               type="button"
-              href="./assets/pages/products.html"
+              to={"/Productos/Categorias/Remeras"}
             >
               Remeras
-            </a>
+            </Link>
           </article>
           <article className="flex-column">
             <img
@@ -50,23 +53,19 @@ const Home = () => {
               width="100%"
               height="100%"
             />
-            <a
+            <Link
               className="btn-secundario"
               type="button"
-              href="./assets/pages/products.html"
+              to={"/Productos/Categorias/Pantalones"}
             >
               Pantalones
-            </a>
+            </Link>
           </article>
         </div>
         <div className="flex-row mt-5">
-          <a
-            href="./assets/pages/products.html"
-            type="button"
-            className="btn-principal"
-          >
+          <Link to={"/Productos"} type="button" className="btn-principal">
             Ver todos los productos
-          </a>
+          </Link>
         </div>
       </section>
 

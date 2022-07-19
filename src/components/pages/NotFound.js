@@ -10,7 +10,10 @@ const NotFound = () => {
           <i className="fas fa-3x">🤨</i>
         </div>
         <h2 className="mb-2">A dónde te metiste che!</h2>
-        <h2>La página a la que intentas acceder no existe, tené cuidado...</h2>
+        <h2>
+          La página a la que intentás acceder no existe, volvé para estar
+          seguro...
+        </h2>
         <Link to={"/"} className="position-relative text-underlined mt-3">
           Volver al Inicio
         </Link>

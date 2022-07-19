@@ -1,8 +1,22 @@
+import { useEffect, useState } from "react";
 import { Outlet, NavLink } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
+import { getCategories } from "../../firebase/querys";
 import logo from "../../img/logo.svg";
 import CartWidget from "./CartWidget";
 
 const NavBar = () => {
+  const [categories, setCategory] = useState([]);
+  useEffect(() => {
+    getCategories().then((data) =>
+      setCategory(
+        data.docs.map((c) => ({
+          id: c.id,
+          ...c.data(),
+        }))
+      )
+    );
+  }, []);
   return (
     <header className="bg-bricks">
       <nav className="navbar container d-flex navbar-expand-lg navbar-light">
@@ -42,52 +56,36 @@ const NavBar = () => {
                 Productos
               </NavLink>
               <ul className="sub-menu sub-menu__categories bg-bricks">
-                <li>
-                  <NavLink
-                    to="/Productos/Categorias/Remeras"
-                    className={({ isActive }) =>
-                      isActive ? "menu__link menu__link--active" : "menu__link"
-                    }
-                  >
-                    Remeras
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/Productos/Categorias/Abrigos"
-                    className={({ isActive }) =>
-                      isActive ? "menu__link menu__link--active" : "menu__link"
-                    }
-                  >
-                    Abrigos
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/Productos/Categorias/"
-                    className={({ isActive }) =>
-                      isActive ? "menu__link menu__link--active" : "menu__link"
-                    }
-                  >
-                    Ver todas las categorías
-                  </NavLink>
-                </li>
+                {categories.map((category) => (
+                  <li key={category.id}>
+                    <NavLink
+                      to={`/Productos/Categorias/${category.name}`}
+                      className={({ isActive }) =>
+                        isActive
+                          ? "menu__link menu__link--active"
+                          : "menu__link"
+                      }
+                    >
+                      {category.name}
+                    </NavLink>
+                  </li>
+                ))}
               </ul>
             </li>
             <li>
-              <NavLink to="/" className="menu__link">
+              <HashLink to="/#help" smooth className="menu__link">
                 Ayuda
-              </NavLink>
+              </HashLink>
             </li>
             <li>
-              <NavLink to="/" className="menu__link">
+              <HashLink to="/#about" smooth className="menu__link">
                 Nosotros
-              </NavLink>
+              </HashLink>
             </li>
             <li>
-              <NavLink to="/" className="menu__link">
+              <HashLink to="/#contact" smooth className="menu__link">
                 Contacto
-              </NavLink>
+              </HashLink>
             </li>
           </ul>
           <ul className="navbar-nav mb-2 mb-lg-0">

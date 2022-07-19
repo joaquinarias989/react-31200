@@ -1,70 +1,120 @@
-# STREET WEAR - Ecommerce - React APP
+<p align="center">
+    <a href="https://street-wear-react.netlify.app/" rel="noopener" target="_blank">
+        <img width=auto height=auto src="https://i.ibb.co/Mccktvc/Favicon.png" alt="Logo de la marca STREET WEAR">
+    </a>
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h3 align="center">Ecommerce REACT</h3>
 
-## Available Scripts
+<div align="center">
 
-In the project directory, you can run:
+[![Status](https://img.shields.io/badge/status-active-success.svg)]()
+[![GitHub Issues](https://img.shields.io/github/issues/joaquinarias989/street-wear-react)](https://github.com/joaquinarias989/street-wear-react/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/joaquinarias989/street-wear-react)](https://github.com/joaquinarias989/street-wear-react/pulls)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
-### `npm start`
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<div align="center"> 
+A ecommerce React application that allows you to buy clothes.
 
-### `npm test`
+Check the [LIVE PREVIEW](https://street-wear-react.netlify.app/).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+</div>
 
-### `npm run build`
+## 📝 Table of Contents
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [About](#about)
+- [Getting Started](#getting_started)
+- [Deployment](#deployment)
+- [Usage](#usage)
+- [Built Using](#built_using)
+- [Authors](#authors)
+- [Acknowledgments](#acknowledgement)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🧐 About <a name = "about"></a>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Educational project carried out over 2 months for the REACT Js course, taught by [Federico Osandon](https://github.com/federico-osandon) at the [CoderHouse Academy](https://www.coderhouse.com/).
+It was carried out within the framework of development, to improve it and scale it to production in the future.
 
-### `npm run eject`
+## 🏁 Getting Started <a name = "getting_started"></a>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for check the live preview of the project.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Prerequisites
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Before you start, you need to have the following things installed:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- [NodeJS](https://nodejs.org/es/)
+- A code editor: [Visual Studio Code](https://code.visualstudio.com/download) (recomended)
 
-## Learn More
+### Installing Locally
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Locating yourself in the path you want, open your preferred terminal and clone the repository with the following command:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+git clone https://github.com/joaquinarias989/street-wear-react.git
+```
 
-### Code Splitting
+Go to the project folder whit:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+cd street-wear-react
+```
 
-### Analyzing the Bundle Size
+Install dependencies with:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+npm install
+```
 
-### Making a Progressive Web App
+Then, run the project with:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
+npm run start
+```
 
-### Advanced Configuration
+<i>(If in some steps you get an error, you can try this command to fix it:</i>
+<b>npm audit fix</b>)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 🎈 Usage <a name="usage"></a>
 
-### Deployment
+This video shows how to navigate and shop in the application. Anyway, feel free to try whatever you want!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+[![Usage](https://img.youtube.com/vi/Q-_X-_X-_Xg/maxresdefault.jpg)](https://www.youtube.com/watch?v=Q-_X-_X-_Xg)
 
-### `npm run build` fails to minify
+## 🚀 Deployment <a name = "deployment"></a>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Check the [Live Preview](https://street-wear-react.netlify.app/) (hosted by [Netlify](https://www.netlify.com/))
+
+## ⛏️ Built Using <a name = "built_using"></a>
+
+#### Main Technologies :
+
+- [Firebase](https://firebase.google.com/) - Database and Authentication
+- [ReactJS](https://es.reactjs.org/) - Web Framework/Library
+- [NodeJs](https://nodejs.org/en/) - Server Environment
+
+#### Dependencies :
+
+- firebase: v9.8.4, for connect to the database and authentication
+- react: v18.1.0, for the web framework/library
+- react-dom: v18.1.0
+- react-scripts: v5.0.1
+- react-router-dom: v6.3.0, for the routing system
+- react-router-hash-link: v2.4.3, for the routing system in same paths
+- sweetalert2: v11.4.19, for showing alerts to the user
+- sweetalert2-react-content: v5.0.1
+- web-vitals: v2.1.4, for measuring the perfomance of the application
+
+## ✍️ Authors <a name = "authors"></a>
+
+- [@joaquinarias989](https://github.com/joaquinarias989) - Idea & Development
+
+## 🎉 Acknowledgements <a name = "acknowledgement"></a>
+
+- To [Federico Osandon](https://github.com/federico-osandon) for the teaching and help provided during the course.
+- To [Nicolaz Dias]() for the excellent mentoring, helping and providing support whenever requested.
+- To the mates of the course.

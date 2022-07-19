@@ -120,6 +120,7 @@ select:-webkit-autofill:focus {
   font-weight: bold;
   padding: 0.5rem 0;
   color: #000;
+  background-color: transparent;
 }
 .accordion-button:not(.collapsed) {
   background-color: transparent;
@@ -367,6 +368,7 @@ select:-webkit-autofill:focus {
 
 /*     PRODUCT CARD    */
 .product__card {
+  background-color: #fff;
   position: relative;
   min-width: 15rem;
   width: clamp(30rem, calc((101% / 4) - 2rem), 100%);
@@ -395,7 +397,7 @@ select:-webkit-autofill:focus {
 }
 .product__card__info {
   background: #fff;
-  padding: 1.5rem 1.5rem 0 1.5rem;
+  padding: 1.5rem;
   transition: all 0.3s ease-in-out;
 }
 .product__card__info .product__card__title {
@@ -404,6 +406,7 @@ select:-webkit-autofill:focus {
   position: relative;
   white-space: nowrap;
   text-overflow: ellipsis;
+  margin-bottom: 1rem;
   overflow: hidden;
   z-index: 0;
 }
@@ -420,7 +423,6 @@ select:-webkit-autofill:focus {
 }
 .product__card__info .product__card__price {
   font-size: 2.1rem;
-  margin: 0.5rem 0 1rem 0;
 }
 .product__card__info .product__card__price span {
   text-decoration: line-through;
@@ -430,7 +432,8 @@ select:-webkit-autofill:focus {
 .product__card .product__card__btn {
   display: flex;
   align-items: center;
-  padding: 0 1.5rem 1.5rem 1.5rem;
+  padding: 1.5rem;
+  padding-top: 0;
   justify-content: center;
   transition: all 0.3s ease-in-out;
 }
@@ -1539,8 +1542,8 @@ main.bg-bricks {
 .cart__resume__products .cart__product .cart__product__img button {
   position: absolute;
   inset: 0;
-  color: #ca1b1b;
-  background: #dddddd90;
+  color: #de1d1d;
+  background: #ffffff90;
   font-size: 1.1em;
   opacity: 0;
   visibility: hidden;

@@ -12,8 +12,8 @@ import {
   writeBatch,
 } from "firebase/firestore";
 
-const prodsRef = collection(firestoreDB, "productos");
-const limitCondition = limit(2);
+const prodsRef = collection(firestoreDB, "products");
+const limitCondition = limit(4);
 
 ////// GET PRODUCTS //////
 export const getProds = async (id, category) => {
@@ -45,6 +45,8 @@ export const getProdsFiltered = async (filter) => {
   );
   return await getDocs(queryProds);
 };
+
+///// CATEGORIES /////
 export const getCategories = async () => {
   return await getDocs(collection(firestoreDB, "categories"));
 };
