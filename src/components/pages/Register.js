@@ -2,6 +2,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { verifyEmail } from "../../validations/validations";
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
@@ -12,6 +13,14 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
     const email = e.target.elements.email.value;
+    const validEmail = verifyEmail(email);
+    if (!validEmail) {
+      return Swal.fire({
+        title: "Email incorrecto",
+        text: "Por favor, revisá el email",
+        icon: "error",
+      });
+    }
     const password = e.target.elements.password.value;
 
     const auth = getAuth();

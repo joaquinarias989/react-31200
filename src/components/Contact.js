@@ -1,22 +1,18 @@
-import { Timestamp } from "firebase/firestore";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { sendContact } from "../firebase/querys";
+import { verifyEmail } from "../validations/validations";
 
 const Contact = () => {
   const [loading, setLoading] = useState(false);
 
-  const verifyEmail = (email) => {
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const validEmail = verifyEmail(e.target.elements.email.value);
+    const email = e.target.elements.email.value;
+    const validEmail = verifyEmail(email);
     if (!validEmail) {
       return Swal.fire({
-        title: <h2>Email incorrecto</h2>,
+        title: "Email incorrecto",
         text: "Por favor, revisá el email ingresado",
         icon: "error",
       });
@@ -27,7 +23,7 @@ const Contact = () => {
       name: e.target.elements.name.value,
       email: e.target.elements.email.value,
       message: e.target.elements.message.value,
-      date: Timestamp.fromDate(new Date()),
+      date: new Date(),
     };
 
     const resp = await sendContact(contact);

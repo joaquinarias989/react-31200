@@ -4,7 +4,7 @@ import { CartContext } from "../context/cartContext";
 import { createOrder, verifyStock } from "../firebase/querys";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
-
+import { verifyEmail } from "../validations/validations";
 const CartForm = () => {
   const [loading, setLoading] = useState(false);
   const { cart, ship, totalPrice, clearCart, removeProdsOutStock } =
@@ -98,12 +98,6 @@ const CartForm = () => {
       confirmButtonText: "Listo",
       icon: "success",
     });
-  };
-
-  const verifyEmail = (email) => {
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
   };
 
   return (
