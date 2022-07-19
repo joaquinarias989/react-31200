@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 const FilterProducts = ({ filterProds }) => {
   return (
     <div className="col-md-2 d-flex justify-content-end align-items-start">
