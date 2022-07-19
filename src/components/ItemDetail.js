@@ -126,7 +126,7 @@ const ItemDetail = ({ item }) => {
         <div className="product__details col-md-6 flex-column">
           <p className="product__description">{item.description}</p>
           <div className="product__preferences d-flex justify-content-between align-items-center mt-3 flex-wrap flex-md-nowrap">
-            <select name="color" className="w-100" defaultValue={"Color"}>
+            <select name="color" className="w-100" defaultValue={item.color}>
               <option value={"Color"} disabled>
                 Color
               </option>

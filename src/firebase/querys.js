@@ -38,14 +38,6 @@ export const getMoreProds = async (lastDoc, category) => {
       )
     : await getDocs(query(prodsRef, startAfter(lastDoc), limitCondition));
 };
-export const getProdsFiltered = async (filter) => {
-  const queryProds = query(
-    prodsRef,
-    where("title", "==", filter),
-    limitCondition
-  );
-  return await getDocs(queryProds);
-};
 
 ///// CATEGORIES /////
 export const getCategories = async () => {
@@ -81,8 +73,6 @@ export const createOrder = async (order, cart) => {
     const orderRef = doc(orderCollection);
     const resOrder = batch.set(orderRef, order);
     resp = resOrder._mutations[0].key.path.segments[1]; //idOrder
-    //No hago addDoc porque eso agrega la orden directamente, y yo lo que quiero es "guardarla" en la transaccion hasta hacer el commit.
-    //Ya que en caso de error en la parte de actualizar stock, la transaccion devolvería error y no se crearía ni la orden ni se actualizaría stock.
 
     await updateStock(cart, batch);
     await batch.commit();
