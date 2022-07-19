@@ -3,6 +3,7 @@ import { useParams, NavLink, useNavigate } from "react-router-dom";
 import ItemDetail from "../ItemDetail";
 import Loading from "../Loading";
 import { getProds } from "../../firebase/querys";
+import Swal from "sweetalert2";
 
 const ItemDetailContainer = () => {
   const [prod, setProd] = useState({});
@@ -17,12 +18,18 @@ const ItemDetailContainer = () => {
         resp._document
           ? setProd({
               id: resp.id,
-              quantity: [],
+              quantity: [0],
               ...resp.data(),
             })
           : navigate("/404");
       })
-      .catch((err) => console.log(err))
+      .catch((err) =>
+        Swal.fire({
+          title: "Algo salió mal",
+          text: "Por favor, intenta nuevamente",
+          icon: "error",
+        })
+      )
       .finally(() => setLoading(false));
   }, [id, navigate]);
 

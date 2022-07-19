@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { CartContext } from "../context/cartContext";
 import { Link } from "react-router-dom";
 
-const CartItem = ({ sizes, item, index }) => {
+const CartItem = ({ item }) => {
   const { addOne, reduceOne, removeProd } = useContext(CartContext);
   return (
     <div className="cart__product" key={item.id}>

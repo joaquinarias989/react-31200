@@ -20,25 +20,9 @@ const CartResume = ({ type }) => {
   ) : type === "page" ? (
     <>
       <div className="cart__resume__products flex-column">
-        {/* {cart.map((item) => {
-          return item.size.map((size) => {
-            const indexSize = item.size.indexOf(size);
-            return item.quantity[indexSize] === 0 ? null : (
-              <CartItem
-                sizes={true}
-                key={`${item.id}-${size}`}
-                item={item}
-                index={indexSize}
-              />
-            );
-          });
-        })} */}
-        {cart.map((item) => {
-          return item.quantity.reduce((acc, quantity) => acc + quantity, 0) ===
-            0 ? null : (
-            <CartItem sizes={true} key={item.id} item={item} />
-          );
-        })}
+        {cart.map((item) => (
+          <CartItem key={item.id} item={item} />
+        ))}
       </div>
       <button className="btn-remove fw-light" onClick={() => clearCart()}>
         <i className="fa fa-trash me-2"></i> Limpiar carrito
@@ -59,9 +43,8 @@ const CartResume = ({ type }) => {
   ) : (
     <>
       <div className="cart__resume__products flex-column">
-        {/* create item in cart for each size of the product */}
         {cart.map((item) => {
-          return <CartItem sizes={true} key={item.id} item={item} />;
+          return <CartItem key={item.id} item={item} />;
         })}
       </div>
       <button

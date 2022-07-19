@@ -1,9 +1,24 @@
 import { NavLink } from "react-router-dom";
+import Swal from "sweetalert2";
 
-/* eslint-disable jsx-a11y/anchor-has-content */
 const Footer = () => {
   const scrollTop = () => {
     window.scrollTo(0, 0);
+  };
+
+  const handleShare = (e) => {
+    e.preventDefault();
+    navigator.clipboard.writeText(window.location.href);
+    return Swal.fire({
+      title: "Link copiado al portapapeles, gracias por compartir!",
+      toast: true,
+      position: "top-end",
+      icon: "success",
+      showConfirmButton: false,
+      showCloseButton: true,
+      timer: 3000,
+      timerProgressBar: true,
+    });
   };
 
   return (
@@ -44,32 +59,36 @@ const Footer = () => {
         <div className="footer__social flex-row">
           <a
             href="https://www.facebook.com"
-            className="fab fa-facebook"
             target="_blank"
             aria-label="Facebook"
             rel="noreferrer"
-          ></a>
+          >
+            <i className="fab fa-facebook"></i>
+          </a>
           <a
             href="https://www.instagram.com/streetwear1__/"
-            className="fab fa-instagram"
             target="_blank"
             aria-label="Instagram"
             rel="noreferrer"
-          ></a>
+          >
+            <i className="fab fa-instagram"></i>
+          </a>
           <a
             href="https://www.twitter.com"
-            className="fab fa-twitter"
             target="_blank"
             aria-label="Twitter"
             rel="noreferrer"
-          ></a>
+          >
+            <i className="fab fa-twitter"></i>
+          </a>
           <a
-            href="."
-            className="fa fa-share"
+            href="#!"
             target="_blank"
             aria-label="Compartir"
-            rel="noreferrer"
-          ></a>
+            onClick={(e) => handleShare(e)}
+          >
+            <i className="fa fa-share"></i>
+          </a>
         </div>
       </div>
     </footer>

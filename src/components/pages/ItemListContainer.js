@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import ItemList from "../ItemList";
 import Loading from "../Loading";
 import { getMoreProds, getProds } from "../../firebase/querys";
-import FilterProducts from "../FilterProducts";
 import Swal from "sweetalert2";
 const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
@@ -25,7 +24,13 @@ const ItemListContainer = () => {
         );
         setLastDoc(data.docs[data.docs.length - 1]);
       })
-      .catch((err) => console.log(err))
+      .catch((err) =>
+        Swal.fire({
+          title: "Algo salió mal",
+          text: "Por favor, intenta nuevamente",
+          icon: "error",
+        })
+      )
       .finally(() => setLoading(false));
   }, [category]);
 
@@ -69,28 +74,6 @@ const ItemListContainer = () => {
       .finally(() => setLoadButton(false));
   };
 
-  const filterProds = (e) => {
-    e.preventDefault();
-    let query = e.target.elements.search.value.trim().toLowerCase();
-    if (query.length > 0) {
-      const filteredProds = products.filter((prod) =>
-        prod.title.trim().toLowerCase().includes(query)
-      );
-      setProducts(filteredProds);
-    } else {
-      getProds(undefined, category).then((data) => {
-        setProducts(
-          data.docs.map((item) => ({
-            id: item.id,
-            quantity: 0,
-            ...item.data(),
-          }))
-        );
-        setLastDoc(data.docs[data.docs.length - 1]);
-      });
-    }
-  };
-
   return (
     <section id="products" className="products container">
       <div className="section__header row">
@@ -115,7 +98,6 @@ const ItemListContainer = () => {
             )}
           </ol>
         </div>
-        <FilterProducts filterProds={filterProds} />
       </div>
       {loading ? (
         <Loading />

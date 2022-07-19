@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import Swal from "sweetalert2";
 import { getCategories } from "../../firebase/querys";
 import Loading from "../Loading";
 
@@ -18,7 +19,13 @@ const Categories = () => {
           }))
         )
       )
-      .catch((err) => console.log(err))
+      .catch((err) =>
+        Swal.fire({
+          title: "Algo salió mal",
+          text: "Por favor, intenta nuevamente",
+          icon: "error",
+        })
+      )
       .finally(() => setLoading(false));
   }, []);
 
