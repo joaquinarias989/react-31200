@@ -448,6 +448,17 @@ select:-webkit-autofill:focus {
   align-items: center;
   flex-basis: 10%;
 }
+.product__card .product__card__btn .product__quantity .size-selector {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: rgba(16, 16, 16, 0.6);
+  border-bottom: 0.5rem solid #ffda07;
+  overflow: hidden;
+  color: #fff;
+  padding: 0.5rem 0;
+  padding-left: 0.5rem;
+}
 .product__card .product__card__btn .btn-column button {
   padding: 0 0.8rem;
   height: 2rem;
@@ -460,6 +471,7 @@ select:-webkit-autofill:focus {
   background: #15709770;
   color: #00000050;
 }
+
 .product__card .product__card__btn .btn-cart {
   display: flex;
   justify-content: end;
@@ -482,11 +494,12 @@ select:-webkit-autofill:focus {
 }
 .product__card .offer {
   position: absolute;
-  top: 10px;
-  right: -10px;
+  top: 1rem;
+  right: -1rem;
   background: #157097;
   color: #fff;
   padding: 0.5rem 1rem;
+  font-size: 0.9em;
   font-weight: bold;
   letter-spacing: 1px;
   box-shadow: 4px 5px 0px #041922;

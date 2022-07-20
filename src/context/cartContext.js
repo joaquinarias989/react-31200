@@ -45,10 +45,7 @@ export const CartContextProvider = ({ children }) => {
     if (quantity > item.stock[index])
       return Toast.fire({
         icon: "error",
-        title:
-          item.stock[index] > 1
-            ? `Sólo nos quedan ${item.stock[index]} unidad/es en talle ${item.size[index]}`
-            : `Sólo nos queda 1 unidad en talle ${item.size[index]}`,
+        title: `No tenemos suficiente stock del producto en talle ${item.size[index]}`,
         timer: 3000,
       });
 
@@ -58,7 +55,7 @@ export const CartContextProvider = ({ children }) => {
       if (prod.quantity[index] + quantity > item.stock[index]) {
         return Toast.fire({
           icon: "error",
-          title: `No tenemos más stock del producto en talle ${item.size[index]}`,
+          title: `No tenemos suficiente stock del producto en talle ${item.size[index]}`,
         });
       }
       prod.quantity[index] += quantity;

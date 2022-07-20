@@ -36,7 +36,7 @@ const ItemDetailContainer = () => {
   return (
     <section className="product container" id="product">
       <div className="section__header">
-        <h1 className="title-underlined">
+        <h1 className="title-underlined position-relative">
           {loading ? "Cargando producto..." : prod.title}
         </h1>
 

@@ -79,15 +79,9 @@ npm run start
 <i>(If in some steps you get an error, you can try this command to fix it:</i>
 <b>npm audit fix</b>)
 
-## 🎈 Usage <a name="usage"></a>
-
-This video shows how to navigate and shop in the application. Anyway, feel free to try whatever you want!
-
-[![Usage](https://img.youtube.com/vi/Q-_X-_X-_Xg/maxresdefault.jpg)](https://www.youtube.com/watch?v=Q-_X-_X-_Xg)
-
 ## 🚀 Deployment <a name = "deployment"></a>
 
-Check the [Live Preview](https://street-wear-react.netlify.app/) (hosted by [Netlify](https://www.netlify.com/))
+Check the [Live Preview](https://street-wear-react.vercel.app/) (hosted by [Vercel](https://vercel.com/)).
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 

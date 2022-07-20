@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function ItemCount({ page, stock, initial = 1, onAdd }) {
+function ItemCount({ page, stock, initial = 1, sizes, onAdd, onChangeSize }) {
   const [quantity, setQuantity] = useState(initial);
 
   const increase = () =>
@@ -63,7 +63,23 @@ function ItemCount({ page, stock, initial = 1, onAdd }) {
           <span id="quantity" className="text-underlined">
             {quantity}
           </span>
+          <select
+            name="talle"
+            className="size-selector clip-path"
+            defaultValue={"Talle"}
+            onChange={(e) => onChangeSize(e.target.value)}
+          >
+            <option value={"Talle"} disabled>
+              Talle
+            </option>
+            {sizes.map((size) => (
+              <option key={size} value={size}>
+                {size}
+              </option>
+            ))}
+          </select>
         </div>
+
         <button
           className="btn-cart"
           onClick={() => onAdd(quantity)}
