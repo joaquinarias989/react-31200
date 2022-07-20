@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://street-wear-react.netlify.app/" rel="noopener" target="_blank">
+    <a href="https://street-wear-react.vercel.app/" rel="noopener" target="_blank">
         <img width=auto height=auto src="https://i.ibb.co/Mccktvc/Favicon.png" alt="Logo de la marca STREET WEAR">
     </a>
 </p>
@@ -20,7 +20,7 @@
 <div align="center"> 
 A ecommerce React application that allows you to buy clothes.
 
-Check the [LIVE PREVIEW](https://street-wear-react.netlify.app/).
+Check the [LIVE PREVIEW](https://street-wear-react.vercel.app/).
 
 </div>
 
